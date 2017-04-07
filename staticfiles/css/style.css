@@ -1,0 +1,19 @@
+#navbar {
+  z-index: 1;
+  width: 100%;
+  position: relative;
+}
+
+.blank-button {
+  background: none; border: none; outline: none
+}
+
+.row.no-gutters {
+   margin-right: 0;
+   margin-left: 0;
+}
+.row.no-gutters > [class^="col-"],
+.row.no-gutters > [class*=" col-"] {
+   padding-right: 0;
+   padding-left: 0;
+}

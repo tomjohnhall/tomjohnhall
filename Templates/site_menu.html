@@ -1,0 +1,133 @@
+{% load static %}
+
+<div id="site-menu">
+  <div id="menu-content">
+      <p class="menu-close"> &#x23ce </p>
+    <img id="tomjohnhallmenu" src="{% static 'img/TJH_letters.png' %}" />
+    <div id="menu-links">
+      <div class="menu-column left">
+        <h1> internal comms: </h1>
+        <h2> (songs from My Big Album) </h2>
+        <ul>
+          <li><a href="{% url 'transactions:thing' %}"> My Transactions </a></li>
+        </ul>
+        <h2> (other stuff) </h2>
+        <ul>
+          <li><a href="{% url 'myoldEP:index' %}"> My Old Electronic EP <span style="font-size:80%">
+            (that I never really released for some reason) </span> </a> </li>
+          <li><a href="{% url 'diary:index' %}"> My Secret Diary </a></li>
+        </ul>
+      </div>
+      <div class="menu-column right">
+        <h1> ext: </h1>
+        <h2> (find me on the web) </h2>
+        <ul>
+          <li><a target="_blank" href="http://tomjohnhall.bandcamp.com"> Bandcamp </a> </li>
+          <li><a target="_blank" href="https://open.spotify.com/artist/5S2nzwPKaPU3lt7zYi3jF2"> Spotify </a> </li>
+          <li><a target="_blank" href="https://facebook.com/tomjohnhall"> FB </a></li>
+          <li><a target="_blank" href="https://instagram.com/tomjohnhall"> Insta </a></li>
+        </ul>
+        <h2> (other things I do) </h2>
+        <ul>
+          <li><a target="_blank" href="http://saxonhouse.co"> Saxon House </a></li>
+        </ul>
+      </div>
+    </div>
+
+</div>
+</div>
+
+<style>
+
+#site-menu {
+    /* Height & width depends on how you want to reveal the overlay (see JS below) */
+    height: 0%;
+    width: 0%;
+    position: fixed; /* Stay in place */
+    z-index: 999; /* Sit on top */
+    left: 0;
+    top: 0;
+    background-color: rgb(228, 214, 23);
+    overflow-x: hidden; /* Disable horizontal scroll */
+    transition: width 0.5s;
+    transition: height 0.5s;
+}
+
+#menu-content {
+    position: relative;
+    width: 100%; /* 100% width */
+    text-align: center; /* Centered text/links */
+    margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+}
+
+.menu-close {
+  margin-bottom: 3%;
+  font-size: 30px;
+}
+
+#tomjohnhallmenu {
+  width: 20em;
+  margin-bottom: 3%;
+}
+
+#menu-links {
+  width: 500px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+#menu-links h1 {
+  font-family:'Space Mono', monospace;
+  font-size: 12px;
+  font-style: italic;
+  padding-bottom: 15px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-bottom: 1px dotted rgb(32, 19, 97);
+}
+
+#menu-links h2 {
+  font-family:'Space Mono', monospace;
+  font-size: 11px;
+  padding-bottom: 10px;
+  margin-left: 1em;
+  text-align: left;
+}
+
+#menu-links ul {
+  list-style-type: none;
+  margin: 0;
+  margin-left: 2em;
+  padding: 0;
+}
+
+#menu-links li {
+  margin-bottom: 1em;
+}
+
+#menu-links li, #menu-links a {
+  color: rgba(0, 0, 0, 0.85);
+  text-align: left;
+  font-family: 'Merriweather', serif;
+}
+
+#menu-links a {
+  border-bottom: 1px dashed rgba(28, 28, 28, 0.62);
+  cursor: pointer;
+}
+
+.menu-column {
+  width: 50%;
+  display: inline-block;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float.: right;
+}
+
+
+</style>

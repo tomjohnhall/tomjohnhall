@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/transactions.css' %}">
+<style>
+
+  </style>
+  <title> Transaction {{ transaction.id }} </title>
+</head>
+<body>
+
+<div class="wrapper">
+  <p> <a href= {% url 'transactions:user_logout' %} > Logout </a> </p>
+
+
+<h1> TRANSACTION #{{ transaction.id }} </h1>
+<p> <span> Date: </span> {{ transaction.date }} </p>
+<p> <span> Item: </span> {{ transaction.item }} </p>
+<p> <span> Shop: </span> {{ transaction.shop }} </p>
+<p> <span> Price: </span> <span>   £</span> {{ transaction.price }} </p>
+{% if transaction.image %}
+  <p> <span> Image: </span> <img src= " {{ transaction.image.url }} " style="width: 500px;" /> </p>
+{% elif transaction.bing_image %}
+  <p> <span> Image: </span> <img src = "{{ transaction.bing_image }} " style="width: 500px;" /> </p>
+{% endif %}
+<div id="map{{ transaction.id }}" class="map"></div>
+    <script>
+      function initMap() {
+        var uluru{{ transaction.id }} = {lat: {{ transaction.lat }} , lng: {{ transaction.lon }} };
+        var map{{ transaction.id }} = new google.maps.Map(document.getElementById('map{{ transaction.id }}'), {
+          zoom: 15,
+          center: uluru{{ transaction.id }}
+        });
+        var marker{{ transaction.id }} = new google.maps.Marker({
+          position: uluru{{ transaction.id }},
+          map: map{{ transaction.id }}
+        });
+      }
+    </script>
+
+<p> <span> Notes: </span> {{ transaction.notes }} </p>
+<p> <span> Links: </span>
+  {% for guiltword in transaction.guiltwords.all %}
+    {% for link in guiltword.links.all %}
+      <p> {{ link }} </p>
+    {% endfor %}
+  {% endfor %}
+ </p>
+{% if prev_tran %}
+  <a href= "{% url 'transactions:transaction_detail' prev_tran %}"> Previous </a>
+{% endif %}
+{% if next_tran %}
+  <a href= "{% url 'transactions:transaction_detail' next_tran %}"> Next </a>
+{% endif %}
+
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdzJbLmVPAW4JUWICdAtvWdRUlnK6TrWU&callback=initMap">
+</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+{% load static %}
+<html>
+<head>
+  <title>New Transaction</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src='http://maps.google.com/maps/api/js?libraries=places&key=AIzaSyAdzJbLmVPAW4JUWICdAtvWdRUlnK6TrWU'></script>
+    <script src="{% static 'js/jquery-locationpicker-plugin-master/src/locationpicker.jquery.js' %}"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/transactions.css' %}">
+</head>
+<body>
+<div class="wrapper">
+  <h1> New Transaction </h1>
+  {% if form %}
+    {% if form.errors %}
+      <p style="color: red;">
+          Please correct the error {{ form.errors|pluralize }} below.
+      </p>
+    {% endif %}
+  {% if location_null %}
+    <p style="color: red">
+        The location appears to be 0,0. Are you in the pacific (if so fair play to the lad), or did it go wrong?
+    </p>
+  {% endif %}
+  <form enctype="multipart/form-data" method="post" action="">
+    <div class="form-section">
+      <span> Item: </span>
+      <div class="form-field">
+    {{ form.item }}
+    {{ form.item.errors }} </div>
+    </div>
+    <div class="form-section">
+      <span> Price: £</span>
+    <div class="form-field">
+    {{ form.price }}
+    {{ form.price.errors }} </div>
+    </div>
+    <div class="form-section">
+      <span> Shop </span>
+    <div class="form-field">
+    {{ form.shop }}
+    {{ form.shop.errors }} </div>
+    </div>
+    <div class="form-section">
+      <span> Image: </span>
+      <div class="form-field">
+    <input type="file" name="user_image" accept="image" ></div>
+    </div>
+    <div class="form-section">
+      <span> Bing Pics </span>
+      <div class="form-field">
+        {{ form.bing_image.as_hidden }}
+      </div>
+      <button type ="button" id="bing_mixer1">Mixy</button>
+      <button type ="button"id="bing_mixer2">Mixo</button>
+      <button type ="button" id="bing_defaulter">Unmix</button>
+    <div class="form-section">
+    <div id="output"></div>
+    <div class="form-section">
+      <span> Notes: </span>
+      <div class="form-field">
+    {{ form.notes }}
+    {{ form.notes.errors }} </div>
+    </div>
+    <div class="form-section">
+      <span> Guilt Words: </span>
+      <div class="form-field">
+        {{ form.guiltwords }}
+        {{ form.guiltwords.errors }}
+      </div>
+    </div>
+
+
+    <div class="form-section">
+      <span> Location: </span>
+
+      <div class="form-field"> <input type="text" id="us2-address" style="width: 200px"/> </div>
+    </div>
+    <div class="form-section">
+      <div id="location-picker" style="width: 500px; height: 400px;"></div>
+    </div>
+    <div class="form-section">
+      <span> Lat: </span>
+      <div class="form-field"> <input type="text" id="us2-lat" name="manual-lat"/> </div>
+    </div>
+    <div class="form-section">
+      <span> Lon: </span>
+      <div class="form-field"> <input type="text" id="us2-lon" name="manual-lon"/> </div>
+    </div>
+<script>
+    $('#location-picker').locationpicker({
+        location: {
+            latitude: {{ lat }},
+            longitude: {{ lon }}
+        },
+        radius : 1,
+        inputBinding: { locationNameInput: $('#us2-address'),
+                        latitudeInput: $('#us2-lat'),
+                        longitudeInput: $('#us2-lon'),},
+        enableAutocomplete: true,
+        });
+
+
+</script>
+
+  <div id="submit">
+    <input type = "submit" value="Save">
+ </div>
+
+ {% csrf_token %}
+
+  </form>
+  {% else %}
+    {% if success %}
+    <p> Yes! Data has been submitted. </p>
+    <p> <a href= {% url 'transactions:user_logout' %} > Logout </a> </p>
+    {% else %}
+    <p> Um, better check that database - something looks iffy. </p>
+    {% endif %}
+  {% endif %}
+  <p> <a href= {% url 'transactions:latest_transaction' %} > View Transactions </a> </p>
+
+</div>
+<footer>
+  <script src= " {% static 'js/transactions-admin.js' %} " ></script>
+  <script id="searchCallback" type="text/javascript" src=""></script>
+  <script>
+  $('#id_item').change(function() {
+    var Query = $('#id_item').val();
+    Search(Query);
+  });
+  $('#id_shop').change(function() {
+    var Query = $('#id_item').val() + ' ' + $('#id_shop').val();
+    Search(Query);
+  });
+  $('#bing_mixer1').click(function() {
+    var Query = $('#id_item').val() + ' ' + $('#id_shop').val();
+    Search(Query);
+  });
+  $('#bing_mixer2').click(function() {
+    var Query = $('#id_shop').val();
+    Search(Query);
+  });
+  $('#bing_defaulter').click(function() {
+    var Query = $('#id_item').val();
+    Search(Query);
+  })
+
+
+
+  </script>
+</footer>
+
+</body>
+
+
+
+</html>

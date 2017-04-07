@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+{% load hotkeys %}
+{% load static %}
+{% load bootstrap3 %}
+
+<html lang="en">
+<head>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/myoldEP.css' %}">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link href="https://fonts.googleapis.com/css?family=Fascinate+Inline|Hind|Raleway|Space+Mono|Merriweather" rel="stylesheet">
+{% bootstrap_css %}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+{% bootstrap_javascript %}
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="{% static 'js/menu.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+<script type="text/javascript" src="{%static 'js/myoldEP.js' %}"></script>
+{% setup_hotkeys %}
+</head>
+
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top" id="navbar">
+      <div class="container">
+        <div id="nav-header" class="navbar-header">
+          <img class="navbar-brand" id="tomjohnhall" src="{% static 'img/TJH_letters.png' %}" />
+        </div>
+        <ul class="nav nav-pills nav-justified">
+          <li class="active"><a href="#">Funke</a></li>
+          <li><a href="#">Bucco</a></li>
+          <li><a href="#">Plums</a></li>
+          <li><a> Pause </a></li>
+          <li><button class="menu-button blank-button"> <img id="menu-button-icon" src="{% static 'img/start_menu_shortcuts.ico' %}" /> </button></li>
+        </ul>
+    </nav>
+
+
+
+  {% include "site_menu.html" %}
+
+  <div class="container-fluid">
+    <div class="row no-gutters">
+      <div class="col-xs-12">
+        <p id="story">
+
+      </p>
+      </div>
+      <p id="load-scifi"> play </p>
+      <div id="loading"> <img style="width: 25px" src="{% static 'img/loading.svg' %}" /> </div>
+  </div>
+
+<footer>
+  <script> prep_ajax(); </script>
+</footer>
+</body>
+
+</html>

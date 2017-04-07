@@ -1,0 +1,23 @@
+{% load static %}
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/transactions.css' %}">
+  <title>Login</title>
+</head>
+<body>
+  <div class="wrapper">
+  {% if logged_out %}
+    <p> {{ logged_out }} </p>
+  {% endif %}
+  <form action= "{% url user_login %}" method="POST"> {% csrf_token %}
+    <p> <span> Username: </span> <input type="text" name="username"> <p>
+    <p> <span> Password: </span> <input type="password" name="password"> <p>
+    <p> <input type="submit" value="Login"> </p>
+  </form>
+  {% if error %}
+    <p> {{ error }} </p>
+  {% endif %}
+</div>
+</body>
+</html>

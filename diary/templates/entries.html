@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+  <div class="container">
+  <div class = "row">
+    <div class= "col-xs-12" id="entries">
+{% if latest_entry_list %}
+  {% if secrets %}
+    {% for entry in latest_entry_list %}
+        <h1><a href="{% url 'diary:detail' entry.id %}">
+          {% if entry.strdate %}
+            {{ entry.strdate }}
+          {% else %}
+            {{ entry.title }}
+          {% endif %}
+        </a></h1>
+        <div class="post">
+          <p> {{entry.content|safe}} </p>
+        </div>
+
+    {% endfor %}
+  {% else %}
+  <div id="secret">
+     <p style="font-size: 8px"> <span class="glyphicon glyphicon-lock">
+     </span> <span style="font-size: 7px;"> Locked by secret passcode</span><span style="font-size: 4px"> - needs deep thought</span></p>
+  </div>
+  <form id="phone-input" action="/diary/secret_submit/" method="post">
+  <input name="secret" id="phone-secret" type="text" />
+  <input type="submit"
+       style="position: absolute; left: -9999px; width: 1px; height: 1px;" />
+  {% csrf_token %}
+  </form>
+
+    {% for poem in latest_entry_list %}
+      <h1><a href="{% url 'diary:millidetail' poem.id %}">{{ poem.title }}</a></h1>
+        <p> {{ poem.content|safe }} </p>
+    {% endfor %}
+  {% endif %}
+{% else %}
+    <p>No entries are available.</p>
+{% endif %}
+  </div>
+</div>
+</div>
+
+</body>
+</html>
+{% endblock %}
