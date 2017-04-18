@@ -6,33 +6,38 @@
 <html lang="en">
 <head>
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
-<link rel="stylesheet" href="{% static 'css/myoldEP.css' %}">
+<link rel="stylesheet" href="{% static 'myoldEP/css/myoldEP.css' %}">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <link href="https://fonts.googleapis.com/css?family=Fascinate+Inline|Hind|Raleway|Space+Mono|Merriweather" rel="stylesheet">
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 {% bootstrap_css %}
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 {% bootstrap_javascript %}
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script type="text/javascript" src="{% static 'js/menu.js' %}"></script>
+
 <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
-<script type="text/javascript" src="{%static 'js/myoldEP.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/menu.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/player.js' %}"></script>
+<script type="text/javascript" src="{%static 'myoldEP/js/myoldEP.js' %}"></script>
 {% setup_hotkeys %}
 </head>
 
 <body>
 
-    <nav class="navbar navbar-default navbar-fixed-top" id="navbar">
-      <div class="container">
+    <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" id="navbar">
+      <div class="container-fluid">
         <div id="nav-header" class="navbar-header">
           <img class="navbar-brand" id="tomjohnhall" src="{% static 'img/TJH_letters.png' %}" />
         </div>
-        <ul class="nav nav-pills nav-justified">
-          <li class="active"><a href="#">Funke</a></li>
-          <li><a href="#">Bucco</a></li>
-          <li><a href="#">Plums</a></li>
-          <li><a> Pause </a></li>
+        <ul class="nav navbar-nav" id="songs-nav">
+          <li class="active" onclick="loader(); scifi(function() {player(document.getElementById('funke'))}); return false;"><a href="#">1] Funke</a></li>
+          <li><a onclick="loader(); scifi(function() {player(document.getElementById('bucco'))}); return false;">2] Bucco</a></li>
+          <li><a onclick="loader(); scifi(function() {player(document.getElementById('plums'))}); return false;">3] Plums</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
           <li><button class="menu-button blank-button"> <img id="menu-button-icon" src="{% static 'img/start_menu_shortcuts.ico' %}" /> </button></li>
         </ul>
+      </div>
     </nav>
 
 
@@ -40,14 +45,80 @@
   {% include "site_menu.html" %}
 
   <div class="container-fluid">
-    <div class="row no-gutters">
-      <div class="col-xs-12">
-        <p id="story">
-
-      </p>
+    <div class="row no-gutters player-wrap">
+      <div class="col-xs-2 col-md-1 pause-button">
+        <span class="helper"></span>
+        <img class="pause-image" src="{% static 'myoldEP/img/pause.png' %}" />
+        <img class="play-image" src="{% static 'myoldEP/img/play.png' %}" />
       </div>
-      <p id="load-scifi"> play </p>
-      <div id="loading"> <img style="width: 25px" src="{% static 'img/loading.svg' %}" /> </div>
+      <audio id="funke" class="active-song" preload="auto">
+        <source src="{% static 'myoldEP/audio/funke.mp3' %}" type="audio/mp3" />
+      </audio>
+      <audio id="bucco" preload="auto">
+        <source src="{% static 'myoldEP/audio/bucco.mp3' %}" type="audio/mp3" />
+      </audio>
+      <audio id="plums" preload="auto">
+        <source src="{% static 'myoldEP/audio/plums.mp3' %}" type="audio/mp3" />
+      </audio>
+      <div class="col-xs-8 col-md-10 player-wrap">
+        <div class="player">
+            <div class="player-line">
+            </div>
+            <div id="draggySong"> </div>
+        </div>
+      </div>
+      <div class="col-xs-2 col-md-1" style="height: 40px;">
+        <div class="row no-gutters" style="height: 40px;">
+          <div class="col-xs-6" style="height: 40px;">
+            <div id="scroll-selector" onclick = "scrollToggle(); return false">
+              <!-- Icons by Iconika https://www.iconfinder.com/bileldjettaou -->
+              <span class="helper"></span>
+              <img id="scroll-image" src="{% static 'myoldEP/img/moon.svg' %}" height="25px;" />
+            </div>
+          </div>
+          <div class="col-xs-6" style="height: 40px;">
+            <div id="refresh-scifi" onclick = "loader(); scifi(); return false">
+              <span class="helper"></span>
+              <img id="refresh-image" src="{% static 'myoldEP/img/refresh.png' %}" height="22px;" />
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+
+    <div class="row no-gutters">
+      <div class="col-xs-12" id="song-load">
+        <p style="text-align: center"><img class="loading-wheel" src="{% static 'img/loading.svg' %}" /></p>
+      </div>
+      <div class="col-xs-12" id="thestory">
+
+        <div id="story-wrap" class="scroll-wrap">
+          <div id="story" class="scroll">
+          </div>
+        </div>
+        {% if story is False %}
+        <div id="error">
+          <p> There has been an error. <span onclick = "scifi(); return false;"> Click here to try again </span> </p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="row no-gutters">
+      <div class="col-xs-12" id="splash">
+        <h1> Internet Fiction </h1>
+        <p> A brand new EP I made sometime in 2015. </p>
+        <p style="font-size: 80%">
+          Songs paired with an indiscriminate chunk of amateur science fiction from an archive by sffworld. Plus, pictures of space, by NASA.</p>
+        <button id="load-scifi" class="blank-button" onclick="scifi(function() {player(document.getElementById('funke'))}); return false;">
+          <img src="{% static 'myoldEP/img/earth.svg' %}" height="25px;"> &#9654;
+        </button>
+        <div id="loading"> <img class="loading-wheel" src="{% static 'img/loading.svg' %}" /> </div>
+      </div>
+    </div>
+
+
   </div>
 
 <footer>

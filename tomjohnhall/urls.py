@@ -21,6 +21,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^', include('myoldEP.urls')),
     url(r'^transactions/', include('transactions.urls')),
     url(r'^diary/', include('diary.urls')),
     url(r'^myoldEP/', include('myoldEP.urls')),
