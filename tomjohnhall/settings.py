@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['http://saxonhouse.co',
                 u'127.0.0.1',
+                u'localhost'
                 ]
 
 
@@ -92,6 +93,10 @@ DATABASES = {
     }
 }
 
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -122,6 +127,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'staticfiles'),
 )
 
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
 DJANGO_WYSIWYG_FLAVOR = "ckeditor"
 
 CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
@@ -132,7 +139,7 @@ HOTKEYS = [
             {'keys': '4 + 2',
             'link': '/diary/secrets',}
         ]
-        
+
 SPECIAL_DISABLED = True
 
 CKEDITOR_CONFIGS = {
