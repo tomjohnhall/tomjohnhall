@@ -13,6 +13,7 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
   <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/menu.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/player.js' %}"></script>
   <script src="{% static 'js/jquery.ui.touch-punch.min.js' %}"></script>
   <script src="{% static 'js/jquery.nanoscroller.min.js' %}"></script>
 
@@ -31,7 +32,7 @@
         <div class="row no-gutters full-height">
 
             <audio id="song" preload="auto">
-              <source src="{% static 'transactions/audio/song.mp3' %}" type="audio/mp3" />
+              <source src="http://www.saxonhouse.co/filedump/song.mp3" type="audio/mp3" />
             </audio>
             <div class="menu-button">
               <button class="blank-button full-height">
@@ -54,8 +55,8 @@
             <div class="pause-button">
               <button class="blank-button full-height">
                 <!-- Pause Filled icon by Icons8 -->
-                <img id="pause-play" src="{% static 'transactions/img/pause.png' %}" />
-                
+                <img class="pause-image" src="{% static 'transactions/img/pause.png' %}" />
+                <img class="play-image" src="{% static 'transactions/img/play.png' %}" />
               </button>
             </div>
           </div>
@@ -78,7 +79,7 @@
           <h1> Transactions: </h1>
           <p> A geo-financial random sampling of transactional guilt, with a song. </p>
           <p style="font-size: 90%;"> Instructions: Click / Swipe for another. Hit the horns for autopilot. </p>
-          <button class="play-button blank-button" onclick="closeSplash()">
+          <button class="play-button blank-button" onclick="player(document.getElementById('song')); closeSplash(); return false;">
             <img id="just-play" src="{% static 'transactions/img/play.png' %}" />
           </button>
         </div>
@@ -154,7 +155,6 @@
   <script src= "{% static 'js/menu.js' %}" > </script>
   <script>
   isMobile();
-  checkAudio();
   prep_ajax();
   mixPage();
   var map;

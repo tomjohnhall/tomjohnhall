@@ -24,7 +24,7 @@ function scifi(callback) {
       if (typeof callback === 'function' && callback()) {
       callback();
       }
-      $('.player-wrap').fadeIn()
+      $('.whole-player').fadeIn()
     }
   })
 }
@@ -33,7 +33,7 @@ function loader() {
   $('#thestory').fadeOut();
   $('#splash').fadeOut()
   $('#song-load').fadeIn();
-  nasapics = ['url("http://imgsrc.hubblesite.org/hvi/uploads/image_file/image_attachment/28725/large_web.jpg")', 'url("http://imgsrc.hubblesite.org/hvi/uploads/image_file/image_attachment/29146/large_web.jpg")', 'url("http://imgsrc.hubblesite.org/hvi/uploads/image_file/image_attachment/28155/large_web.jpg")'];
+  nasapics = ['url("http://saxonhouse.co/filedump/space1.jpg")', 'url("http://saxonhouse.co/filedump/space2.jpg")', 'url("http://saxonhouse.co/filedump/space3.jpg")'];
   randnasa = nasapics[Math.floor(Math.random()*nasapics.length)];
   console.log(randnasa);
   $('body').css('background-image', randnasa);
@@ -62,16 +62,15 @@ $(document).ready(function() {
     $('li').removeClass('active');
     $(this).addClass('active');
   });
-  var scrollpause = false;
+
   $('.pause-button').click( function() {
-    scrollpause = !scrollpause;
+    scrollpause = paused;
     if (scrollpause) {
         $('#story').css("animation-play-state", "paused");
     }
     else {
         $('#story').css("animation-play-state", "running");
     }
-
   });
 
 });

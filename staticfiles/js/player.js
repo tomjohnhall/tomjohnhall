@@ -1,12 +1,17 @@
 
 var id;
 var activeSong;
+var paused = true;
 
 function player(audio) {
-    $('audio').trigger('pause');
     id = '#' + audio.id;
     activeSong = audio;
-    $(id).trigger('play');
+    activeSong.play();
+    if (!activeSong.paused || activeSong.currentTime > 0) {
+      paused = false;
+      $('.play-image').fadeOut('fast', function() {
+      $('.pause-image').fadeIn('fast'); });
+    }
     activeSong.ontimeupdate = function() {
 
         var fractionOfSong = (activeSong.currentTime/activeSong.duration);
@@ -14,7 +19,10 @@ function player(audio) {
         width = (fractionOfSong * 100) + '%';
         // apply to player width
         $('.player').css('width', width);
+        $('#draggySong').css('left', width);
       }
+
+
   }
 
 
@@ -23,21 +31,23 @@ function player(audio) {
 
 $(document).ready(function () {
 
-var paused = false;
+$('.play-image').hide();
 
 $('.pause-button').click( function() {
-    paused = !paused;
     if (paused) {
-      $(id).trigger('pause');
-      $('.pause-image').fadeOut('fast', function() {
-        $('.play-image').fadeIn('fast');
-      });
-    }
-    else {
-      $(id).trigger('play');
+      activeSong.play();
       $('.play-image').fadeOut('fast', function() {
         $('.pause-image').fadeIn('fast');
+      });
+      paused = !paused;
+    }
+    else {
+      activeSong.pause();
+      $('.pause-image').fadeOut('fast', function() {
+        $('.play-image').fadeIn('fast');
+
     });
+    paused = !paused;
     }
   });
 
@@ -53,10 +63,13 @@ $( "#draggySong" ).draggable({ axis: "x" }, {
       stop: function() {
         var offset = $('#draggySong').position();
         var draggedTo = offset.left;
+        console.log(draggedTo);
         var playerWidth = $('.player-wrap').width();
+        console.log(playerWidth);
         var divide = (playerWidth / draggedTo);
+        console.log(divide);
         var songTime = (activeSong.duration / divide);
-        songTime = parseInt(songTime);
+        songTime = parseFloat(songTime);
         activeSong.currentTime = songTime;
       }
     });

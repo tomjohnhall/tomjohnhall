@@ -45,27 +45,27 @@
   {% include "site_menu.html" %}
 
   <div class="container-fluid">
-    <div class="row no-gutters player-wrap">
+    <div class="row no-gutters whole-player">
       <div class="col-xs-2 col-md-1 pause-button">
         <span class="helper"></span>
         <img class="pause-image" src="{% static 'myoldEP/img/pause.png' %}" />
         <img class="play-image" src="{% static 'myoldEP/img/play.png' %}" />
       </div>
       <audio id="funke" class="active-song" preload="auto">
-        <source src="{% static 'myoldEP/audio/funke.mp3' %}" type="audio/mp3" />
+        <source src="http://www.saxonhouse.co/filedump/funke.mp3" type="audio/mp3" />
       </audio>
       <audio id="bucco" preload="auto">
-        <source src="{% static 'myoldEP/audio/bucco.mp3' %}" type="audio/mp3" />
+        <source src="http://www.saxonhouse.co/filedump/bucco.mp3" type="audio/mp3" />
       </audio>
       <audio id="plums" preload="auto">
-        <source src="{% static 'myoldEP/audio/plums.mp3' %}" type="audio/mp3" />
+        <source src="http://www.saxonhouse.co/filedump/plums.mp3" type="audio/mp3" />
       </audio>
       <div class="col-xs-8 col-md-10 player-wrap">
         <div class="player">
             <div class="player-line">
             </div>
-            <div id="draggySong"> </div>
         </div>
+        <div id="draggySong"> </div>
       </div>
       <div class="col-xs-2 col-md-1" style="height: 40px;">
         <div class="row no-gutters" style="height: 40px;">
@@ -123,7 +123,7 @@
   {% csrf_token %}
 <footer>
   <script>
-  
+  prep_ajax()
    </script>
 </footer>
 </body>

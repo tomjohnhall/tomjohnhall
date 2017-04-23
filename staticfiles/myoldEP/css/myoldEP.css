@@ -22,7 +22,7 @@ html, body, .container-fluid {
 
 
 body {
-  background: #000000 url('http://imgsrc.hubblesite.org/hvi/uploads/image_file/image_attachment/29146/large_web.jpg') top left repeat;
+  background: #000000 url("http://saxonhouse.co/filedump/space2.jpg") top left repeat;
 }
 
 .navbar-collapse.collapse {
@@ -56,17 +56,23 @@ body {
   margin-right: auto;
 }
 
-.player-wrap {
+.whole-player {
   width: 100%;
   height: 40px;
   background-color: rgba(255, 255, 255, 0.1);
   display: none;
 }
 
+.player-wrap {
+  width: 100%;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 .player {
-  width: 0;
+  width: 100%;
   height: 100%;
-  position: relative;
+  position: absolute;
 }
 
 .player-line {
@@ -75,7 +81,7 @@ body {
 
 
 #draggySong {
-  height: 20px; position: absolute; width: 5px; top:50%; margin-top: -10px; background-color: #5d608b; opacity: 1; left: 99.9%; z-index: 5;
+  height: 20px; position: absolute; width: 5px; top:50%; margin-top: -10px; background-color: #5d608b; opacity: 1; z-index: 5;
   border-radius: 2px;
 }
 
@@ -97,9 +103,7 @@ body {
   width: 34px;  vertical-align: middle;
 }
 
-.play-image {
-  display: none;
-}
+
 
 #splash {
   height: 100%;

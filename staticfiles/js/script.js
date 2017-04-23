@@ -1,5 +1,5 @@
 // Run a csrf safe function at end of page load- see Django documentation
-$(document).ready( function() {
+function prep_ajax() {
 
   function getCookie(name) {
     var cookieValue = null;
@@ -29,4 +29,4 @@ $(document).ready( function() {
         }
     }
   });
-});
+};
