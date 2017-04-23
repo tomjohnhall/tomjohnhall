@@ -31,9 +31,9 @@
           <img class="navbar-brand" id="tomjohnhall" src="{% static 'img/TJH_letters.png' %}" />
         </div>
         <ul class="nav navbar-nav" id="songs-nav">
-          <li class="active" onclick="loader(); scifi(function() {player(document.getElementById('funke'))}); return false;"><a href="#">1] Funke</a></li>
-          <li><a onclick="loader(); scifi(function() {player(document.getElementById('bucco'))}); return false;">2] Bucco</a></li>
-          <li><a onclick="loader(); scifi(function() {player(document.getElementById('plums'))}); return false;">3] Plums</a></li>
+          <li id="funke-nav" class="active" onclick="loader(); scifi(function() {player(document.getElementById('funke'), songEnd(document.getElementById('funke')))}); return false;"><a href="#">1] Funke</a></li>
+          <li id="bucco-nav"><a onclick="loader(); scifi(function() {player(document.getElementById('bucco'), songEnd(document.getElementById('bucco')))}); return false;">2] Bucco</a></li>
+          <li id="plums-nav"><a onclick="loader(); scifi(function() {player(document.getElementById('plums'), songEnddocument.getElementById('plums')())}); return false;">3] Plums</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><button class="menu-button blank-button"> <img id="menu-button-icon" src="{% static 'img/start_menu_shortcuts.ico' %}" /> </button></li>
@@ -106,16 +106,22 @@
       </div>
     </div>
 
+    <div class="row no-gutters mobile-play">
+      <div class="col-xs-12">
+        <p style="font-size: 140%; text-align: center; opacity: 0.9; margin-top: 20px;"> [PLAY] </p>
+      </div>
+    </div>
+
     <div class="row no-gutters">
       <div class="col-xs-12" id="splash">
         <h1> Internet Fiction </h1>
         <p> A brand new EP I made sometime in 2015. </p>
         <p style="font-size: 80%">
           Songs paired with an indiscriminate chunk of amateur science fiction from an archive by sffworld. Plus, pictures of space, by NASA.</p>
-        <button id="load-scifi" class="blank-button" onclick="scifi(function() {player(document.getElementById('funke'))}); return false;">
+        <button id="load-scifi" class="blank-button" onclick="scifi(function() {player(document.getElementById('funke'), songEnd(document.getElementById('funke')))}); return false;">
           <img src="{% static 'myoldEP/img/earth.svg' %}" height="25px;"> &#9654;
         </button>
-        <div id="loading"> <img class="loading-wheel" src="{% static 'img/loading.svg' %}" /> </div>
+        <div id="loading"> <img class="loading-wheel" src="{% static 'img/loading.svg' %}" /> <p style="opacity: 0.8" class="blink-me"> [ loading scifi ] </p> </div>
       </div>
     </div>
 

@@ -3,10 +3,10 @@ var id;
 var activeSong;
 var paused = true;
 
-function player(audio) {
+function player(audio, callback) {
     id = '#' + audio.id;
     activeSong = audio;
-  
+    activeSong.play();
     if (!activeSong.paused || activeSong.currentTime > 0) {
       paused = false;
       $('.play-image').fadeOut('fast', function() {
@@ -21,10 +21,10 @@ function player(audio) {
         $('.player').css('width', width);
         $('#draggySong').css('left', width);
       }
-
-
+      if (typeof callback === 'function' && callback()) {
+      callback(); // callback for player function
+      }
   }
-
 
 
 
@@ -33,6 +33,9 @@ $(document).ready(function () {
 
 $('.play-image').hide();
 
+$('.mobile-play').click( function() {
+  activeSong.play();
+})
 
 
 $('.pause-button').click( function() {
@@ -65,11 +68,8 @@ $( "#draggySong" ).draggable({ axis: "x" }, {
       stop: function() {
         var offset = $('#draggySong').position();
         var draggedTo = offset.left;
-        console.log(draggedTo);
         var playerWidth = $('.player-wrap').width();
-        console.log(playerWidth);
         var divide = (playerWidth / draggedTo);
-        console.log(divide);
         var songTime = (activeSong.duration / divide);
         songTime = parseFloat(songTime);
         activeSong.currentTime = songTime;

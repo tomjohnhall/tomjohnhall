@@ -7,7 +7,6 @@ var addedLinks = [];
 
 // The function needs a transaction id to get started
 function guiltfeed(id) {
-  console.log("guiltfeed has started") // check guiltfeed has been called
   $.ajax({
     url : "guilt/", // links to a django view for dumping data
     type : "POST",
@@ -27,8 +26,6 @@ function guiltfeed(id) {
           var link = links[i];
           // check if link has already been added to feed
           if (addedLinks.indexOf(link.link) == -1) {
-            // good news everyone!
-            console.log("link is new");
             // everything gets compiled into html elements
             image = '<div class="guilt-img-container"><img class="guilt-img" src="' + link.image_url + '"></div>' ;
             hyperlink = '<a href="' + link.link + '" target ="_blank">' ;
@@ -47,7 +44,6 @@ function guiltfeed(id) {
             }
           // caught repeats
           else {
-            console.log("link is old")
           }
         }
     }
@@ -441,7 +437,6 @@ function swap() {
           // pass the id to guiltfeed
           tran_id = data_set.tran_id;
           guiltfeed(tran_id);
-          console.log("success"); // all done
       }
 });
 };
@@ -579,7 +574,6 @@ function isMobile() {
   }
     else {
       $('.transaction').click( function() {
-          console.log("page clicked")  // sanity check
           swap();
       });
     }
