@@ -6,8 +6,8 @@ var paused = true;
 function player(audio) {
     id = '#' + audio.id;
     activeSong = audio;
-
-    if (!activeSong.paused && activeSong.currentTime > 0) {
+  
+    if (!activeSong.paused || activeSong.currentTime > 0) {
       paused = false;
       $('.play-image').fadeOut('fast', function() {
       $('.pause-image').fadeIn('fast'); });
@@ -22,6 +22,7 @@ function player(audio) {
         $('#draggySong').css('left', width);
       }
 
+
   }
 
 
@@ -32,9 +33,7 @@ $(document).ready(function () {
 
 $('.play-image').hide();
 
-$('.play-button').click(function() {
-  activeSong.play();
-})
+
 
 $('.pause-button').click( function() {
     if (paused) {

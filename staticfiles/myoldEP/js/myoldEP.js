@@ -3,10 +3,10 @@ $(document).ajaxStart(function () {
     $('#loading').fadeIn();
   }).ajaxStop(function () {
     $('#loading').hide();
+    activeSong.play();
   });
 
 function scifi(callback) {
-  console.log("sci fi has started");
   $.ajax({
     url : "scifi/", // links to a django view for dumping data
     type : "POST",
@@ -28,7 +28,7 @@ function scifi(callback) {
 
     }
   })
-  activeSong.play();
+
 }
 
 function loader() {
@@ -37,7 +37,6 @@ function loader() {
   $('#song-load').fadeIn();
   nasapics = ['url("http://saxonhouse.co/filedump/space1.jpg")', 'url("http://saxonhouse.co/filedump/space2.jpg")', 'url("http://saxonhouse.co/filedump/space3.jpg")'];
   randnasa = nasapics[Math.floor(Math.random()*nasapics.length)];
-  console.log(randnasa);
   $('body').css('background-image', randnasa);
 }
 
@@ -64,6 +63,7 @@ $(document).ready(function() {
     $('li').removeClass('active');
     $(this).addClass('active');
   });
+
 
   $('.pause-button').click( function() {
     scrollpause = paused;
