@@ -25,9 +25,10 @@ function scifi(callback) {
       callback();
       }
       $('.whole-player').fadeIn();
-      activeSong.play();
+
     }
   })
+  activeSong.play();
 }
 
 function loader() {

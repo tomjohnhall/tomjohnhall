@@ -7,7 +7,7 @@ function player(audio) {
     id = '#' + audio.id;
     activeSong = audio;
 
-    if (!activeSong.paused || activeSong.currentTime > 0) {
+    if (!activeSong.paused && activeSong.currentTime > 0) {
       paused = false;
       $('.play-image').fadeOut('fast', function() {
       $('.pause-image').fadeIn('fast'); });
@@ -21,7 +21,6 @@ function player(audio) {
         $('.player').css('width', width);
         $('#draggySong').css('left', width);
       }
-
 
   }
 
