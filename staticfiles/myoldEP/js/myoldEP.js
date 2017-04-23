@@ -24,7 +24,8 @@ function scifi(callback) {
       if (typeof callback === 'function' && callback()) {
       callback();
       }
-      $('.whole-player').fadeIn()
+      $('.whole-player').fadeIn();
+      activeSong.play();
     }
   })
 }

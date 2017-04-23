@@ -6,7 +6,7 @@ var paused = true;
 function player(audio) {
     id = '#' + audio.id;
     activeSong = audio;
-    activeSong.play();
+
     if (!activeSong.paused || activeSong.currentTime > 0) {
       paused = false;
       $('.play-image').fadeOut('fast', function() {
@@ -32,6 +32,10 @@ function player(audio) {
 $(document).ready(function () {
 
 $('.play-image').hide();
+
+$('.play-button').click(function() {
+  activeSong.play();
+})
 
 $('.pause-button').click( function() {
     if (paused) {
