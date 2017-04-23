@@ -1,3 +1,5 @@
+var isMobile = window.matchMedia("only screen and (max-width: 760px)");
+
 $(document).ajaxStart(function () {
     // hide the loader button
     $('#load-scifi').hide()
@@ -23,7 +25,6 @@ function scifi(callback) {
       if (typeof callback === 'function' && callback()) {
       callback(); // callback for player function
       }
-      var isMobile = window.matchMedia("only screen and (max-width: 760px)"); // check for mobile
       // if it's mobile, show the intermediary play button (autoplay blocked on mobile browsers)
       if (isMobile.matches) {
         $('.mobile-play').slideDown("slow", function() {
@@ -71,11 +72,18 @@ activeSong.addEventListener('ended', function() {
     player(document.getElementById('bucco'), songEnd(document.getElementById('bucco')));
     $('li').removeClass('active');
     $('#bucco-nav').addClass('active');
+
+    if (isMobile.matches) {
+    $('.pause-image').fadeOut('fast', function() {$('.play-image').fadeIn('fast');})
+    }
   }
   else if (activeSong.id == "bucco") {
     player(document.getElementById('plums'), songEnd(document.getElementById('plums')));
     $('li').removeClass('active');
     $('#plums-nav').addClass('active');
+    if (isMobile.matches) {
+    $('.pause-image').fadeOut('fast', function() {$('.play-image').fadeIn('fast');})
+    }
   }
 })
 }
