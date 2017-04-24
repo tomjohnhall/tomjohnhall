@@ -199,6 +199,10 @@ body {
 	font-weight: bold;
 	text-align: justify;
 	overflow: hidden;
+  -ms-transform-origin: 50% 100%;
+  -ms-transform: perspective(300px) rotateX(20deg);
+  -webkit-transform-origin: 50% 100%;
+  -webkit-transform: perspective(300px) rotateX(20deg);
 	transform-origin: 50% 100%;
 	transform: perspective(300px) rotateX(20deg);
 }
@@ -221,8 +225,26 @@ body {
 	position: absolute;
 	top: 100%;
 	animation: scroll 240s linear 4s infinite;
+  -webkit-animation: scroll 240s linear 4s infinite;
+  -moz-animation: scroll 240s linear 4s infinite;
+  -o-animation: scroll 240s linear 4s infinite;
   color: rgba(234, 254, 3, 0.91);
 
+}
+
+-webkit-@keyframes scroll {
+	0% { top: 100%; }
+	100% { top: -170%; }
+}
+
+-moz-@keyframes scroll {
+	0% { top: 100%; }
+	100% { top: -170%; }
+}
+
+-o-@keyframes scroll {
+	0% { top: 100%; }
+	100% { top: -170%; }
 }
 
 @keyframes scroll {
