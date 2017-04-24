@@ -1,7 +1,6 @@
 
 $(document).ready(function(){
 $('.menu-button').click( function() {
-    console.log('menu');
     document.getElementById("site-menu").style.width = "100%";
     document.getElementById("site-menu").style.height = "100%";
 });
