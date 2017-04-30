@@ -534,34 +534,7 @@ function isMobile() {
     var isMobile = window.matchMedia("only screen and (max-width: 760px)");
 
     if (isMobile.matches) {
-      var pageElement = document.getElementById('thing-wrapper')
 
-      // create a simple instance
-      // by default, it only adds horizontal recognizers
-      var pageHammer = new Hammer(pageElement);
-
-      // listen to events...
-      pageHammer.on("panleft panright", function(ev) {
-        swap();
-      });
-
-      /*
-      var tapped = false;
-
-      $('.grid-box').each(function( index ) {
-        /
-        $(this).hammer().bind("tap", function() {
-          tapped = !tapped;
-          console.log(tapped);
-          if (tapped) {
-            $(this).animate({height: '200%'}, 500);
-          }
-          else {
-            $('.grid-box').animate({height: '100%'}, 500);
-          }
-        });
-      });
-    */
     $('#credits-hover').hide()
     $(window).scroll(function() {
       if($(window).scrollTop() + $(window).height() == $(document).height()) {
