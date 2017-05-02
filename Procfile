@@ -1,1 +1,1 @@
-web: waitress-serve --port=8000 tomjohnhall.wsgi:application
+web: gunicorn tomjohnhall.wsgi --log-file - 
