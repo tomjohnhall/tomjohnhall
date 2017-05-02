@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost','tomjohnhall.com','www.tomjohnhall.com','desolate-savannah-85315.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'localhost:8000', 'tomjohnhall.com', 'www.tomjohnhall.com', 'desolate-savannah-85315.herokuapp.com']
 
 
 # Application definition
