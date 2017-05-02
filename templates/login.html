@@ -2,7 +2,7 @@
 <html>
 <head>
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'css/transactions.css' %}">
+  <link rel="stylesheet" href="{% static 'transactions/css/transactions.css' %}">
   <title>Login</title>
 </head>
 <body>
@@ -10,10 +10,11 @@
   {% if logged_out %}
     <p> {{ logged_out }} </p>
   {% endif %}
-  <form action= "{% url user_login %}" method="POST"> {% csrf_token %}
+  <form action= "{% url user_login %}" method="POST">
     <p> <span> Username: </span> <input type="text" name="username"> <p>
     <p> <span> Password: </span> <input type="password" name="password"> <p>
     <p> <input type="submit" value="Login"> </p>
+    {% csrf_token %}
   </form>
   {% if error %}
     <p> {{ error }} </p>
