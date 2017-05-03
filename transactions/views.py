@@ -133,7 +133,9 @@ def soup(request):
             try:
                 page = urlopen(link.link)
             except Exception, e:
-                pass
+                exceptions.append(link.link)
+                exceptions.append(str(Exception))
+                continue
             try:
                 USERAGENT = 'something'
                 HEADERS = {'User-Agent': USERAGENT}
