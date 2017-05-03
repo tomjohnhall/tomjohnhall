@@ -165,7 +165,7 @@ def soup(request):
                     link.image_url = image_url["content"]
                     images.append(image_url["content"])
                 link.save()
-            except Exception e:
+            except Exception, e:
                 exceptions.append(link.link)
                 exceptions.append(str(Exception))
                 continue
