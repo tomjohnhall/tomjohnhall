@@ -145,25 +145,30 @@ def soup(request):
                 exceptions.append(link.link)
                 exceptions.append(str(Exception))
                 continue
-            soup = BeautifulSoup(page.read(), "html.parser")
-            title = soup.find("meta", property="og:title")
-            description = soup.find("meta", property="og:description")
-            image_url = soup.find("meta", property="og:image")
-            if title:
-                link.title = title["content"]
-                titles.append(title["content"])
-            else:
-                title = soup.find("title")
+            try:
+                soup = BeautifulSoup(page.read(), "html.parser")
+                title = soup.find("meta", property="og:title")
+                description = soup.find("meta", property="og:description")
+                image_url = soup.find("meta", property="og:image")
                 if title:
-                    link.title = str(title)
-                    titles.append(title)
-            if description:
-                link.description = description["content"]
-                descriptions.append(description["content"])
-            if image_url:
-                link.image_url = image_url["content"]
-                images.append(image_url["content"])
-            link.save()
+                    link.title = title["content"]
+                    titles.append(title["content"])
+                else:
+                    title = soup.find("title")
+                    if title:
+                        link.title = str(title)
+                        titles.append(title)
+                if description:
+                    link.description = description["content"]
+                    descriptions.append(description["content"])
+                if image_url:
+                    link.image_url = image_url["content"]
+                    images.append(image_url["content"])
+                link.save()
+            except Exception e:
+                exceptions.append(link.link)
+                exceptions.append(str(Exception))
+                continue
     return render(request, 'soup.html', {'exceptions': exceptions, 'titles': titles, 'descriptions': descriptions, 'images': images})
 
 
