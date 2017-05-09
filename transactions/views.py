@@ -18,12 +18,14 @@ from bs4 import BeautifulSoup
 
 
 def login_form(request):
+    # redirect if logged in or render the login form with the follow through link as transactions namespace
     if request.session.has_key('logged_in'):
         return HttpResponseRedirect('new')
     else:
         return render(request, 'login.html', {'user_login': 'transactions:user_login'})
 
 def user_login(request):
+    # authenticate and login, or return login with error and transactions name space
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(username=username, password=password)
@@ -56,7 +58,7 @@ def new_transaction(request):
         except:
             lat = 0
             lon = 0
-
+        # handle form submission
         if request.method == 'POST':
             # Get everything from form
             form = TransactionForm(request.POST, request.FILES)
@@ -73,7 +75,7 @@ def new_transaction(request):
                 lon = request.POST.get('manual-lon', 0)
                 if lat != None:
                     t = Transaction(date= now, strdate = strnow, item = item, price = price, shop= shop, notes = notes, lat = lat, lon = lon)
-                    # to prevent
+                    # set either image or bing image
                     if image:
                         t.image = image
                     else:
@@ -82,15 +84,18 @@ def new_transaction(request):
                     success = True
                     return render(request, 'new_transaction.html', {'success': success})
                 else:
+                    # return a null location error
                     location_null = True
                     form = TransactionForm()
                     lat = j['latitude']
                     lon = j['longitude']
                     return render(request, 'new_transaction.html', {'form': form, 'location_null':location_null, 'lat': lat, 'lon': lon})
         else:
+            # not POST, render form
             form = TransactionForm()
             return render(request, 'new_transaction.html', {'form': form, 'lat': lat, 'lon': lon})
     else:
+        # not logged in, render login
         return render(request, 'login.html', {'user_login': 'transactions:user_login'})
 
 def latest_transaction(request):
@@ -102,6 +107,7 @@ def transaction_detail(request, transaction_id):
     transaction = Transaction.objects.get(id=transaction_id)
     prev_id = transaction.id - 1
     next_id = transaction.id + 1
+    # try for a previous/next transaction and convert to string
     try:
         Transaction.objects.get(id = prev_id)
         prev_tran = str(prev_id)
@@ -112,6 +118,7 @@ def transaction_detail(request, transaction_id):
         next_tran = str(next_id)
     except Transaction.DoesNotExist:
         next_tran = None
+    #get the links from guiltwords associated with transaction
     links = []
     guiltwords = transaction.guiltwords.all()
     for word in guiltwords:
@@ -121,15 +128,19 @@ def transaction_detail(request, transaction_id):
     return render(request, 'transaction_detail.html', {'transaction': transaction, 'prev_tran': prev_tran, 'next_tran': next_tran, 'links': links})
 
 def soup(request):
+    # get all the links
     guiltlinks = GuiltLink.objects.all()
+    # init lists for soup parts and failures
     titles = []
     descriptions = []
     images = []
     exceptions = []
     for link in guiltlinks:
+        # test if the link has already been souped
         if link.title:
             pass
         else:
+            # try soup step by step and throw exceptions in the exception list
             try:
                 page = urlopen(link.link)
             except Exception, e:
@@ -173,49 +184,53 @@ def soup(request):
 
 
 def thing(request):
+    # get a random transaction
     random_idx = random.randint(0, Transaction.objects.count() - 1)
     random_obj = Transaction.objects.all()[random_idx]
-    if request.session.has_key('previous_id'):
-        while random_idx == request.session['previous_id']:
-            random_idx = random.randint(0, Transaction.objects.count() - 1)
-            random_obj = Transaction.objects.all()[random_idx]
-    request.session['previous_id'] = random_idx
     transaction = random_obj
     return render(request, 'transaction_thing.html', {'transaction': transaction })
 
 def guiltfeed(request):
     if request.method == 'POST':
+        # get the transaction via id
         tran_id = request.POST.get('id')
         transaction = Transaction.objects.get(id=tran_id)
+        # shuffle the guilt words
         guiltwords = sorted(transaction.guiltwords.all(), key=lambda x: random.random())
+        # make a list of dict items for links and their elements
         links = []
         for word in guiltwords:
             word_links = word.links.all()
             for link in word_links:
-                jsonlink = {}
-                jsonlink["link"] = link.link
-                jsonlink["title"] = link.title
-                jsonlink["description"] = link.description
-                jsonlink["image_url"] = link.image_url
-                links.append(jsonlink)
+                if link.title:
+                    jsonlink = {}
+                    jsonlink["link"] = link.link
+                    jsonlink["title"] = link.title
+                    jsonlink["description"] = link.description
+                    jsonlink["image_url"] = link.image_url
+                    links.append(jsonlink)
         return JsonResponse(links, safe=False)
 
 def change(request):
     if request.method == 'POST':
+        # get a random transaction and ensure it is new
         random_idx = random.randint(0, Transaction.objects.count() - 1)
         random_obj = Transaction.objects.all()[random_idx]
         if request.session.has_key('previous_id'):
             while random_idx == request.session['previous_id']:
                 random_idx = random.randint(0, Transaction.objects.count() - 1)
                 random_obj = Transaction.objects.all()[random_idx]
+    # set new id as prev id for next change
     request.session['previous_id'] = random_idx
     transaction = random_obj
+    # another pile of links
     links = []
     guiltwords = transaction.guiltwords.all()
     for word in guiltwords:
         word_links = word.links.all()
         for link in word_links:
             links.append(link.link)
+    # get either an image file url or a bing link
     if transaction.image:
         image_url = transaction.image.url
     else:
@@ -224,6 +239,7 @@ def change(request):
         bing_image = transaction.bing_image
     else:
         bing_image = None
+    # sort the transaction data in a dictionary and throw back with json
     data_set = {'tran_id': transaction.id,
                 'strdate': transaction.strdate,
                 'item': transaction.item,

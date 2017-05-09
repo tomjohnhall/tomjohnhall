@@ -21,9 +21,7 @@ html, body, .container-fluid {
 }
 
 
-body {
-  background: #000000 url("http://saxonhouse.co/filedump/space2.jpg") top left repeat;
-}
+
 
 .navbar-collapse.collapse {
   display: block!important;

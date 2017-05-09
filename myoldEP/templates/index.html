@@ -13,12 +13,23 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 {% bootstrap_javascript %}
-
+<script>
+ var nasa1 = "{% static 'myoldEP/img/space1.jpg' %}";
+ var nasa2 = "{% static 'myoldEP/img/space2.jpg' %}";
+ var nasa3 = "{% static 'myoldEP/img/space3.jpg' %}";
+</script>
 <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/menu.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/player.js' %}"></script>
 <script type="text/javascript" src="{% static 'myoldEP/js/myoldEP.js' %}"></script>
 <script src="{% static 'js/jquery.ui.touch-punch.min.js' %}"></script>
+<style>
+body {
+  background: #000000 url("{% static 'myoldEP/img/space2.jpg' %}") top left repeat;
+}
+</style>
+</head>
+
 
 </head>
 
@@ -52,13 +63,13 @@
         <img class="play-image" src="{% static 'myoldEP/img/play.png' %}" />
       </div>
       <audio id="funke" class="active-song" preload="auto">
-        <source src="http://www.saxonhouse.co/filedump/funke.mp3" type="audio/mp3" />
+        <source src="{% static 'myoldEP/audio/funke.mp3' %}" type="audio/mp3" />
       </audio>
       <audio id="bucco" preload="auto">
-        <source src="http://www.saxonhouse.co/filedump/bucco.mp3" type="audio/mp3" />
+        <source src="{% static 'myoldEP/audio/buccp.mp3' %}" type="audio/mp3" />
       </audio>
       <audio id="plums" preload="auto">
-        <source src="http://www.saxonhouse.co/filedump/plums.mp3" type="audio/mp3" />
+        <source src="{% static 'myoldEP/audio/plums.mp3' %}" type="audio/mp3" />
       </audio>
       <div class="col-xs-8 col-md-10 player-wrap">
         <div class="player">
