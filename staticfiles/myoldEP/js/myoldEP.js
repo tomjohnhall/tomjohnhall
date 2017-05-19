@@ -38,7 +38,7 @@ function loader() {
   $('#thestory').fadeOut();
   $('#splash').fadeOut();
   $('#song-load').fadeIn();
-  nasapics = [nasa1, nasa2, nasa3];
+  nasapics = ['url("http://saxonhouse.co/filedump/space1.jpg")', 'url("http://saxonhouse.co/filedump/space2.jpg")', 'url("http://saxonhouse.co/filedump/space3.jpg")'];
   randnasa = nasapics[Math.floor(Math.random()*nasapics.length)];
   $('body').css('background-image', randnasa);
 }
