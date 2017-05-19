@@ -33,7 +33,7 @@ function guiltfeed(id) {
             description = '<p class="guilt-description">' + link.description + '</p>' ;
             // Now we have a full block of html to add to the feed as an article element
             prepender = '<div class="guilt-item">' + image + hyperlink + title + description + '</div>' ;
-            var $prepender = $(prepender)
+            var $prepender = $(prepender);
             $('#loading').fadeOut();
             // add to top of feed
             $prepender.hide().prependTo('#guiltfeed').slideDown(600);
@@ -64,245 +64,7 @@ function initMap(lat,lon) {
     zoom: 14,
     center: newpoint,
     disableDefaultUI: true,
-    styles: [
-  {
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#242f3e"
-      }
-    ]
-  },
-  {
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#746855"
-      }
-    ]
-  },
-  {
-    "elementType": "labels.text.stroke",
-    "stylers": [
-      {
-        "color": "#242f3e"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative.land_parcel",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative.locality",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#d59563"
-      }
-    ]
-  },
-  {
-    "featureType": "poi",
-    "elementType": "labels.text",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "poi",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#d59563"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.business",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#263c3f"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#6b9a76"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#38414e"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "color": "#212a37"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "labels.icon",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#9ca5b3"
-      }
-    ]
-  },
-  {
-    "featureType": "road.arterial",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#746855"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "color": "#1f2835"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#f3d19c"
-      }
-    ]
-  },
-  {
-    "featureType": "road.local",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road.local",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "transit",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "transit",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#2f3948"
-      }
-    ]
-  },
-  {
-    "featureType": "transit.station",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#d59563"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#17263c"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#515c6d"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "labels.text.stroke",
-    "stylers": [
-      {
-        "color": "#17263c"
-      }
-    ]
-  }
-],
+    styles: [],
       });
 
   // make a marker
@@ -407,32 +169,25 @@ function swap() {
 
       // the data set is basically a js replica of a Transaction python object
       success : function(data_set) {
-          var grid = ['#top-left', '#top-mid', '#top-right', '#bottom-right'];
-          grid = shuffle(grid);
           // so go ahead and replace the stuff
-          var title = '<h1 class="transaction-title"> Transaction #' + data_set.tran_id + '</h1> <p class="item">' + data_set.item + '</p> <p class="shop">' + data_set.shop + '</p>' ;
-          var price = '<h1 class="price"> £ ' + data_set.price + '</h1> <p class="date">' + data_set.strdate + '</p>';
-          var notes = '<p class="notes">' + data_set.notes + '</p>';
-          $('.transaction').fadeTo(200, 0, function() {
-          $(grid[0]).children('.nano-content').html(title);
-          $(grid[1]).children('.nano-content').html(price);
+          title = '<h1 class="transaction-title"> Transaction #' + data_set.tran_id + '</h1> <p class="item">' + data_set.item + '</p> <p class="shop">' + data_set.shop + '</p>' ;
+          price = '<h1 class="price"> £ ' + data_set.price + '</h1> <p class="date">' + data_set.strdate + '</p>';
+          notes = '<p class="notes">' + data_set.notes + '</p>';
           // check for image because otherwise we'll end up with broken image elements on the page
           if (data_set.image_url != null) {
-            var image_html = '<img class="transaction_image" src="' + data_set.image_url + '">';
-            $(grid[2]).children('.nano-content').html(image_html);
+            image = '<img class="transaction_image" src="' + data_set.image_url + '">';
            }
           else if (data_set.bing_image != null) {
-            var image_html = '<img class="transaction_image" src="' + data_set.bing_image + '">';
-            $(grid[2]).children('.nano-content').html(image_html);
+            image = '<img class="transaction_image" src="' + data_set.bing_image + '">';
            }
           else {
           // if no image, just get rid of the thing altogether
-            $(grid[2]).children('.nano-content').html('');
+            image = ''
             }
-          $(grid[3]).children('.nano-content').html(notes);
-          mixPage();
-          });
-          $('.transaction').fadeTo(400, 1);
+          background = randomColour();
+          transaction = '<div class="transaction" style="background-color: ' + background + '">' + title + image + price + notes + '</div>';
+          $transaction = $(transaction);
+          $transaction.hide().prependTo('#transaction-feed').slideDown(600);
           addLatLng(data_set.lat, data_set.lon);
           // pass the id to guiltfeed
           tran_id = data_set.tran_id;
@@ -465,7 +220,7 @@ function getRandomInt(min, max) {
 // mixPage function - various visual trickery
 
 
-function mixPage() {
+function randomColour() {
   /* Random background color */
   var background = '#000000';
   var randomEight = getRandomInt(0,8);
@@ -477,10 +232,7 @@ function mixPage() {
   }
   var colors = ['#deb0d5', '#bacef1', '#a0d1a9', '#afb8d1', '#c2aecf', '#e9a9dd', '#ecb7b7', '#f4eea9' ] ;
   background = colors[randomEight] ;
-  $('body').css('background', background);
-  /* Random Fonts */
-  var fonts = [];
-
+  return background
 }
 
 /*
@@ -546,7 +298,7 @@ function isMobile() {
     });
   }
     else {
-      $('.transaction').click( function() {
+      $('#transaction-feed').click( function() {
           swap();
       });
     }

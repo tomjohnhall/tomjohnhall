@@ -21,7 +21,7 @@
 {% bootstrap_javascript %}
 
   <title> Transactions by Tom John Hall </title>
-  
+
 
 {% include "site_menu.html" %}
 
@@ -32,7 +32,7 @@
         <div class="row no-gutters full-height">
 
             <audio id="song" preload="auto">
-              <source src="http://www.saxonhouse.co/filedump/song.mp3" type="audio/mp3" />
+              <source src="{% static 'transactions/audio/song.mp3' %}" type="audio/mp3" />
             </audio>
             <div class="menu-button">
               <button class="blank-button full-height">
@@ -89,45 +89,18 @@
 
 
   <div class="row big-row">
-    <div class="col-sm-9 big-col">
+    <div class="col-sm-8 big-col">
       <div class="row little-row first-row">
-        <div class="col-sm-4 col-xs-6 transaction grid-box nano" id="top-left">
-          <div id="title-item-shop" class="nano-content">
-            <h1 class ="transaction-title"> Transaction #{{ transaction.id }} </h1>
-            <p class ="item">{{ transaction.item }}</p>
-            <p class="shop">{{ transaction.shop }}</p>
+          <div class="col-sm-12" id="transaction-feed">
           </div>
-        </div>
-        <div class="col-sm-4 col-xs-6 transaction grid-box nano" id="top-mid">
-          <div id="price-date" class="nano-content">
-            <p class="price"> £ {{ transaction.price }}</p>
-            <p class="date">{{ transaction.strdate }}</p>
-          </div>
-        </div>
-        <div class="col-sm-4 col-xs-6 transaction grid-box nano" id="top-right">
-          <div id="image" class="nano-content">
-            {% if transaction.image %}
-              <img class="transaction_image" src="{{ transaction.image_url }}" />
-            {% elif transaction.bing_image %}
-              <img class="transaction_image" src="{{ transaction.bing_image }}" />
-            {% endif %}
-          </div>
-        </div>
       </div>
       <div class="row little-row second-row">
-        <div class="col-sm-4 col-xs-6 transaction grid-box nano" id="bottom-right">
-          <div id="notes" class="nano-content">
-            <p class="notes">{{ transaction.notes }}</p>
-          </div>
-        </div>
-        <div class="col-sm-8 col-xs-12 grid-box nano" id="bottom-left">
             <div id="map" class="nano-content"></div>
-        </div>
       </div>
 
     </div>
-    <div class ="col-sm-3 col-xs-12 guilt-col nano">
-      <div id="guiltfeed-container" class="nano-content">
+    <div class ="col-sm-4 col-xs-12 guilt-col">
+      <div id="guiltfeed-container">
         <div id="loading"> <img style="width: 40px" src="{% static 'img/loading.svg' %}" /> </div>
         <div id="guiltfeed">
         </div>
@@ -156,9 +129,9 @@
   <script>
   isMobile();
   prep_ajax();
-  mixPage();
   var map;
   var poly;
+  swap();
   initMap({{ transaction.lat }}, {{transaction.lon }});
   guiltfeed({{transaction.id}});
 
