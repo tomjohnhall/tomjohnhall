@@ -1,45 +1,13 @@
 /* General elements */
 
-html {
-  overflow-x: hidden;
-}
+body {
+  background-color: rgba(204, 204, 204, 0.31) !important;
+  min-height: 100%;
 
-html, body {
-  -webkit-transition: background 2s; /* Safari */
-  transition: background 2s;
-}
-
-html, body, .container-fluid {
-  height: 100%;
 }
 
 #thing-wrapper {
   height: 100%;
-}
-
-
-
-.big-col {
-  height: 100%
-}
-
-.little-row {
-  height: 50%;
-  padding-left: 10px;
-  padding-right: 5px;
-}
-
-.grid-box, #map {
-  height: 100%;
-}
-
-.grid-box {
-   overflow: auto;
-
-}
-
-.guilt-col {
-  height: 100%
 }
 
 
@@ -56,8 +24,9 @@ h1 {
 /* HEADER */
 
 #header {
-  height: 10%; border-bottom: 3px solid rgba(218, 216, 216, 0.27);
-  background: rgba(255, 255, 255, 0.22); padding-bottom: 3px; margin-bottom: 3px;
+  height: 4.5em; border-bottom: 3px solid rgba(218, 216, 216, 0.27);
+  padding-bottom: 3px; margin-bottom: 3px;
+  background-color: rgba(204, 204, 204, 0.38);
 }
 
 .player-wrap {
@@ -87,7 +56,7 @@ h1 {
 
 
 #menu-button-icon, .pause-image, .play-image, #mute, #auto-icon {
-  max-height: 100%; display: block; margin-left: auto; margin-right: auto;
+  max-height: 100%; max-width: 100%; display: block; margin-left: auto; margin-right: auto;
 }
 
 .play-image {
@@ -196,87 +165,48 @@ h1 {
 
 
 
+
+
 /* Transaction elements */
 
-#top-mid {
-  background: repeating-linear-gradient(
-  45deg,
-  rgba(255, 255, 255, 0.19),
-  rgba(255, 255, 255, 0.19) 10px,
-  transparent 10px,
-  transparent 20px
-  );
-}
-
-#top-right {
-  background: repeating-linear-gradient(
-  180deg,
-  rgba(255, 255, 255, 0.19),
-  rgba(255, 255, 255, 0.19) 10px,
-  transparent 10px,
-  transparent 20px
-  );
-}
-
-.nano-content {
-  padding: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-
+.transaction {
+  width: 100%;
+  clear: both;
+  margin-bottom: 2em;
+  border-bottom: 3px solid rgba(173, 170, 242, 0.67);
 }
 
 .transaction-title {
 font-family: 'Raleway', sans-serif;
-font-size: 32px;
-font-weight: 800;
-text-align: center;
+font-size: 24px;
+color: #4d4d4d;
 margin-top: 0;
 padding-top: 0;
 }
 
-.item {
+.transaction_image {
+ max-width: 40%; float: left; padding: 0.5em;
+}
+
+.transaction-right {
   font-family: 'Hind', sans-serif;
-  font-size: 20px;
-  font-weight: 800;
-  text-align: center;
+}
+
+.item {
 }
 
 
 .shop {
-  font-family: 'Hind', sans-serif;
-  font-size: 20px;
-  font-style: italic;
-  text-align: right;
 }
 
 .price {
-  font-family: 'Fascinate Inline', cursive;
-  font-size: 50px;
-  text-align: right;
 }
 
 .date {
-  font-family: 'Hind', sans-serif; font-size: 26px;
-  text-align: right;
-}
-
-#price-date {
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-}
-
-
-.image {
- width: 100%; height: 100%; overflow: visible;
-}
-
-.transaction_image {
-   max-width: 100%;
 }
 
 .notes {
-  font-family: 'Space Mono', monospace;
+  font-size: 90%;
 }
 
 #map-container {
@@ -285,7 +215,6 @@ padding-top: 0;
 }
 
 #map {
-
   opacity: 1;
  }
 
@@ -327,6 +256,14 @@ padding-top: 0;
  font-size: 10px; opacity: 0.9; display: none;
 }
 
+/* MAP */
+
+#map-wrap {
+  display: none;
+}
+
+
+
 .footer {
   width: 100%;
   position: fixed;
@@ -357,63 +294,6 @@ padding-top: 0;
 
 /* DESKTOP */
 @media screen and (min-width: 768px) {
-  .big-col {
-    height: 100%;
-  }
-  .guilt-col {
-    height: 100%;
-  }
-  .little-row {
-    height: 47%;
-  }
-  .tiny-row {
-    height: 2%;
-  }
-  #top-right {
-    background: none;
-  }
-  #bottom-right {
-    background: repeating-linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.19),
-    rgba(255, 255, 255, 0.19) 10px,
-    transparent 10px,
-    transparent 20px
-    );
-  }
-  .transaction-title {
-    margin-top: 20px;
-    padding-top: 20px;
-  }
-
-  .guilt-item {
-    height: 8em; width: 100%;
-  }
-  #guiltfeed-container {
-
-
-
-  }
-
-  .guilt-item a {
-
-  }
-
-  .guilt-img-container {
-   height: 50%; width: 100%; overflow: hidden;
-  }
-
-  .guilt-img {
-   width: 100%; margin-top: -3em;
-  }
-
-  .guilt-title {
-    width: 100%;
-  }
-
-  .transaction_image {
-    max-width: 99%; max-height: 99%;
-  }
 
 
 

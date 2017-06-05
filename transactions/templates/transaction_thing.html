@@ -8,14 +8,12 @@
   <link href="https://fonts.googleapis.com/css?family=Fascinate+Inline|Hind|Raleway|Space+Mono|Merriweather" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'transactions/css/transactions-thing.css' %}">
-  <link rel="stylesheet" href="{% static 'css/nanoscroller.css' %}">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
   <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/menu.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/player.js' %}"></script>
   <script src="{% static 'js/jquery.ui.touch-punch.min.js' %}"></script>
-  <script src="{% static 'js/jquery.nanoscroller.min.js' %}"></script>
 
 {% bootstrap_css %}
 {% bootstrap_javascript %}
@@ -79,11 +77,9 @@
           <h1> Transactions: </h1>
           <p> A geo-financial random sampling of transactional guilt, with a song. </p>
           <p style="font-size: 90%;"> Instructions: Click / Swipe for another. Hit the horns for autopilot. </p>
-          <p> Under Construction </p>
-          <!-- <button class="play-button blank-button" onclick="player(document.getElementById('song')); closeSplash(); return false;">
+          <button class="play-button blank-button" onclick="player(document.getElementById('song')); closeSplash(); return false;">
             <img id="just-play" src="{% static 'transactions/img/play.png' %}" />
           </button>
-          //-->
         </div>
       </div>
     </div>
@@ -91,27 +87,26 @@
 
 
   <div class="row big-row">
-    <div class="col-sm-8 big-col">
-      <div class="row little-row first-row">
-          <div class="col-sm-12" id="transaction-feed">
-          </div>
-      </div>
-      <div class="row little-row second-row">
-            <div id="map" class="nano-content"></div>
-      </div>
-
+    <div class="col-sm-1 sidebar">
     </div>
-    <div class ="col-sm-4 col-xs-12 guilt-col">
+    <div class="col-sm-7 col-xs-11 big-col">
+        <div class="col-sm-12" id="transaction-feed">
+        </div>
+    </div>
+    <div class ="col-sm-4 col-xs-11 guilt-col">
       <div id="guiltfeed-container">
         <div id="loading"> <img style="width: 40px" src="{% static 'img/loading.svg' %}" /> </div>
         <div id="guiltfeed">
         </div>
       </div>
     </div>
+    <div class="col-sm-11" id="map-wrap">
+        <div id="map"></div>
+    </div>
     {% csrf_token %}
   </div>
 
-</div>
+
 
 <footer class="footer">
 
@@ -140,5 +135,6 @@
   </script>
 
 </footer>
+</div>
 </body>
 </html>

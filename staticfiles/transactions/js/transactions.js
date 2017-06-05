@@ -170,9 +170,8 @@ function swap() {
       // the data set is basically a js replica of a Transaction python object
       success : function(data_set) {
           // so go ahead and replace the stuff
-          title = '<h1 class="transaction-title"> Transaction #' + data_set.tran_id + '</h1> <p class="item">' + data_set.item + '</p> <p class="shop">' + data_set.shop + '</p>' ;
-          price = '<h1 class="price"> £ ' + data_set.price + '</h1> <p class="date">' + data_set.strdate + '</p>';
-          notes = '<p class="notes">' + data_set.notes + '</p>';
+          title = '<h1 class="transaction-title">' + data_set.item  + '</h1>' ;
+          notes = '<p class="transaction_id"> #tr00' + data_set.tran_id + '</p> <p class="price"> £ ' + data_set.price + '</p> <p class="shop">' + data_set.shop + '</p> <p class="notes">' + data_set.notes + '</p>';
           // check for image because otherwise we'll end up with broken image elements on the page
           if (data_set.image_url != null) {
             image = '<img class="transaction_image" src="' + data_set.image_url + '">';
@@ -185,7 +184,7 @@ function swap() {
             image = ''
             }
           background = randomColour();
-          transaction = '<div class="transaction" style="background-color: ' + background + '">' + title + image + price + notes + '</div>';
+          transaction = '<div class="transaction" style="background-color: ' + background + '">' + title + image +  notes + '<div style="clear: both"></div></div>';
           $transaction = $(transaction);
           $transaction.hide().prependTo('#transaction-feed').slideDown(600);
           addLatLng(data_set.lat, data_set.lon);
@@ -230,7 +229,7 @@ function randomColour() {
       var randomEightTwo = getRandomInt(0,8);
     }
   }
-  var colors = ['#deb0d5', '#bacef1', '#a0d1a9', '#afb8d1', '#c2aecf', '#e9a9dd', '#ecb7b7', '#f4eea9' ] ;
+  var colors = ['rgba(222, 176, 213, 0.47)', 'rgba(186, 206, 241, 0.31)', 'rgba(160, 209, 169, 0.43)', 'rgba(#afb8d1, 0.3)', 'rgba(#c2aecf, 0.31)', 'rgba(#e9a9dd, 0.31)', 'rgba(#ecb7b7, 0.35)', 'rgba(#f4eea9, 0.34)' ] ;
   background = colors[randomEight] ;
   return background
 }
@@ -275,7 +274,7 @@ $(document).ajaxStart(function () {
 
 $(document).ready(function(){
   $('#loading').hide();
-  $('.nano').nanoScroller();
+
 });
 
 // HANDLE EVENTS
