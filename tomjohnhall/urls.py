@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^transactions/', include('transactions.urls')),
     url(r'^diary/', include('diary.urls')),
     url(r'^myoldEP/', include('myoldEP.urls')),
+    url(r'^modern-ghosts/', include('modernghosts.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

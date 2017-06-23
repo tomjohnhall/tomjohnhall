@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'transactions',
     'bootstrap3',
     'myoldEP',
+    'modernghosts',
 )
 
 

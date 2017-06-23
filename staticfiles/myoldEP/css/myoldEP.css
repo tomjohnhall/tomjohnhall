@@ -163,6 +163,10 @@ html, body, .container-fluid {
   margin-top: 20px;
 }
 
+#story.scroll {
+  margin-top: -85px;
+}
+
 #scroll-selector {
   background-color: transparent;
   color: rgba(147, 160, 186, 0.75);

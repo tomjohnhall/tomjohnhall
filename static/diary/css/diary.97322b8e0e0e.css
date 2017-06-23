@@ -1,0 +1,74 @@
+body {
+  height: 100%;
+}
+
+input {
+  height: 20px;
+  width: 30px;
+}
+
+.menu-button {
+  width: 70px;
+  padding: 5px;
+}
+
+#navbar {
+  z-index: 1;
+}
+
+#entries {
+
+}
+
+.post {
+  background: rgba(255, 255, 255, 1);
+}
+
+#entries h1 {
+  background: rgba(2, 193, 165, 0.15);
+  border-bottom: 3px solid rgba(1, 34, 55, 0.5);
+  text-align: right;
+}
+
+#entries p {
+  color: rgba(0, 10, 33, 0.83);
+}
+
+#tomjohnhall {
+  width: 100%;
+  padding: 5px;
+}
+
+#menu-button-icon {
+  padding: 5px;
+}
+
+#navbar {
+  width: 100%;
+}
+
+#nav-header {
+  max-width: 150px;
+  display: inline-block;
+  float: left;
+}
+
+#nav-right {
+  max-width: 150px;
+  position: absolute;
+  right: 15px;
+}
+
+#secret {
+  position: fixed;
+  right: 0px;
+  top: 60px;
+  display: none;
+}
+
+#phone-input {
+  display: none;
+  position: fixed;
+  right: 0px;
+  top:80px;
+}

@@ -1,0 +1,257 @@
+
+#menu-button-icon {
+  display: block;
+  margin: auto;
+
+}
+
+.menu-button {
+  width: 100%;
+  right: 10px;
+  justify-content: center;
+}
+
+html, body, .container-fluid {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  color: rgba(228, 225, 225, 1);
+  width: 100%;
+
+}
+
+
+
+
+.navbar-collapse.collapse {
+  display: block!important;
+}
+
+.navbar-nav>li, .navbar-nav {
+  float: left !important;
+  font-family: 'Space Mono', monospace;
+  cursor: pointer;
+}
+
+.navbar-nav.navbar-right:last-child {
+  margin-right: -15px !important;
+}
+
+.navbar-right {
+  float: right!important;
+}
+
+#nav-header {
+  width: 15%;
+}
+
+#tomjohnhall {
+  width: 120px;
+  height: auto;
+  padding: 0;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.whole-player {
+  width: 100%;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: none;
+}
+
+.player-wrap {
+  width: 100%;
+  height: 40px;
+
+}
+
+.player {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: repeating-linear-gradient(
+  45deg,
+  rgba(255, 255, 255, 0.05),
+  rgba(255, 255, 255, 0.05) 10px,
+  transparent 10px,
+  transparent 20px
+  );
+}
+
+.player-line {
+  position: absolute; width: 100%; height: 8px; top: 50%; margin-top: -4px; background-color: rgb(23, 29, 71);
+}
+
+
+#draggySong {
+  height: 100%; position: absolute; width: 20px; top:50%; margin-top: -20px; z-index: 5;
+
+}
+
+#ship {
+  height: 32px;
+  position: relative;
+  top: 4px;
+  left: -10px;
+  opacity: 0.9;
+}
+
+.pause-button {
+  white-space: nowrap;
+  text-align: center;
+  height: 100%;
+  cursor: pointer;
+
+}
+
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.pause-image, .play-image {
+  width: 34px;  vertical-align: middle;
+}
+
+
+
+#splash {
+  height: 100%;
+  text-align: center;
+
+}
+
+#splash h1 {
+  margin-top: 10%;
+  font-family: 'Space Mono', monospace;
+}
+
+#splash p {
+  width: 400px;
+  max-width: 100%;
+  margin: auto;
+}
+
+#load-scifi {
+  margin-top: 10px;
+  color: rgba(162, 185, 182, 0.81);
+}
+
+.loading-wheel {
+  width: 27px;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.row {
+  width: 100%;
+}
+
+#song-load {
+  width: 100%;
+  display: none;
+}
+
+#thestory {
+  display: none;
+}
+
+#story {
+  margin-top: 20px;
+}
+
+#scroll-selector {
+  background-color: transparent;
+  color: rgba(147, 160, 186, 0.75);
+  white-space: nowrap;
+  text-align: center;
+  height: 100%;
+  cursor: pointer;
+
+}
+
+#refresh-scifi {
+  text-align: center;
+  height: 100%;
+  cursor: pointer;
+
+}
+
+#scroll-image {
+  margin-right: 0;
+  padding-right: 0;
+}
+
+.scroll-wrap
+{
+  margin-top: 0;
+	position: fixed;
+	width: 99%;
+	height: 50em;
+	bottom: 0;
+  right: 1%;
+  font-size: 200%;
+	font-weight: bold;
+	text-align: justify;
+	overflow: hidden;
+  -ms-transform-origin: 50% 100%;
+  -ms-transform: perspective(300px) rotateX(20deg);
+  -webkit-transform-origin: 50% 100%;
+  -webkit-transform: perspective(300px) rotateX(20deg);
+	transform-origin: 50% 100%;
+	transform: perspective(300px) rotateX(20deg);
+}
+
+
+.scroll-wrap:after
+{
+	position: absolute;
+	content: ' ';
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 60%;
+	background-image: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
+	pointer-events: none;
+}
+
+.scroll {
+
+	position: absolute;
+	top: 100%;
+	animation: scroll 240s linear 4s infinite;
+  -webkit-animation: scroll 240s linear 4s infinite;
+  -moz-animation: scroll 240s linear 4s infinite;
+  -o-animation: scroll 240s linear 4s infinite;
+  color: rgba(234, 254, 3, 0.91);
+
+}
+
+-webkit-@keyframes scroll {
+	0% { top: 100%; }
+	100% { top: -170%; }
+}
+
+-moz-@keyframes scroll {
+	0% { top: 100%; }
+	100% { top: -170%; }
+}
+
+-o-@keyframes scroll {
+	0% { top: 100%; }
+	100% { top: -170%; }
+}
+
+@keyframes scroll {
+	0% { top: 100%; }
+	100% { top: -170%; }
+}
+
+@media screen and (min-width: 768px) {
+  #menu-button-icon {
+    margin-top: 7px;
+    margin-bottom: -7px;
+  }
