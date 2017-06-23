@@ -4,13 +4,13 @@ $(document).ajaxStart(function () {
     // hide the loader button
     $('#load-scifi').hide()
     // show the loading wheel
-    $('#loading').fadeIn();
   }).ajaxStop(function () {
     // hide the wheel
     $('#loading').hide();
   });
 
 function scifi(callback) {
+  $('#loading').fadeIn();
   if (typeof callback === 'function' && callback()) {
   callback(); // callback for player function
   }

@@ -1,1 +1,1 @@
-web: gunicorn tomjohnhall.wsgi --log-file -
+web: gunicorn tomjohnhall.wsgi --log-file - 
