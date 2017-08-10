@@ -1,0 +1,92 @@
+<div class="modal fade" id="mailer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h3 class="modal-title" id="exampleModalLabel">Mailing List</h3>
+
+      </div>
+      <form>
+      <div class="modal-body mailer-body">
+
+      <p>Hi mate, thank you for looking at my website. *Please* join my mailing list. If, like me, the idea of digital monopolies dictating our shared cultural experience makes you uncomfortable,
+      this will allow me to keep in touch with you personally instead, whenever I release music or build new things.</p>
+      <div class="form-group">
+        <label for="id_email">Email address:</label>
+        <input type="email" class="form-control" id="id_email">
+        <p id="email-message" class="error-message"></p>
+      </div>
+      <div class="form-group">
+        <label for="id_mobile">Mobile digits (optional):</label>
+        <input type="phone_number" class="form-control" id="id_mobile">
+        <p id="mobile-message" class="error-message"></p>
+      </div>
+      <p> How can I use your number? (select any or all) </p>
+      <div class="checkbox">
+        <label class="control-label" for="id_text"><input type="checkbox" id="id_text"> Slip you a text?</label>
+      </div>
+      <div class="checkbox">
+        <label class="control-label" for="id_whatsapp"><input type="checkbox" id="id_whatsapp"> More informal WhatsApp approach?</label>
+      </div>
+      <div class="checkbox">
+        <label class="control-label" for="id_group"><input type="checkbox" id="id_group">Add me to a Whatsapp Group with everyone else and see what happens?*</label>
+      </div>
+      <p> *I'm not sure what this is yet but it might be nice for everyone to get together and send eachother stuff. You can leave it on mute obv. </p>
+      {% csrf_token %}
+
+      </div>
+      <div class="modal-body" id="mailer-success" style="display:none;">
+        <h3> Success! You've been added to the list. Thank you. </h3>
+      </div>
+
+    </dixv>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary mailer-body">Submit</button>
+      </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<script>
+setTimeout(function() {
+    $('#mailer').modal();
+}, 30000);
+
+$(document).ready(function() {
+  $('form').submit(function(event) {
+    email = $('#id_email').val();
+    mobile = $('#id_mobile').val();
+    text = $('#id_text').is(":checked");
+    whatsapp = $('#id_whatsapp').is(":checked");
+    group = $('#id_group').is(":checked");
+    form = {'email': email, 'mobile': mobile, 'text': text, 'whatsapp': whatsapp, 'group': group};
+    $.ajax({
+        type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+        url         : '{% url 'mailer_submit' %}', // the url where we want to POST
+        data        : form, // our data object
+        dataType    : 'json', // what type of data do we expect back from the server
+    success: function(response) {
+      if (response.success) {
+        $('.mailer-body').fadeOut(400, function() {
+          $('#mailer-success').fadeIn();
+        });
+      }
+      else {
+      if (response.email) {
+        $('#email-message').text('Error: ' + response.email[0]); ;
+      }
+      if (response.mobile) {
+        $('#mobile-message').text('Error: ' + response.mobile[0]);
+      }
+      }
+    }
+    });
+    event.preventDefault();
+});
+});
+</script>

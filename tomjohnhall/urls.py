@@ -17,6 +17,7 @@ from django.conf.urls.static import static
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from mailer.views import mailer_submit
 
 
 urlpatterns = [
@@ -26,6 +27,7 @@ urlpatterns = [
     url(r'^diary/', include('diary.urls')),
     url(r'^myoldEP/', include('myoldEP.urls')),
     url(r'^modern-ghosts/', include('modernghosts.urls')),
+    url(r'^mailer_submit/', mailer_submit, name="mailer_submit"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

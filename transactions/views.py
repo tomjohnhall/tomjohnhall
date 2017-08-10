@@ -13,6 +13,7 @@ import json
 from urllib2 import urlopen
 from urllib2 import Request
 from bs4 import BeautifulSoup
+from mailer.forms import MailerForm
 
 
 
@@ -49,15 +50,6 @@ def new_transaction(request):
         # get the time, time as string, and location via json thingy
         now = datetime.datetime.now()
         strnow = now.strftime('%d/%m/%Y')
-        send_url = 'http://freegeoip.net/json'
-        try:
-            r = requests.get(send_url)
-            j = json.loads(r.text)
-            lat = j['latitude']
-            lon = j['longitude']
-        except:
-            lat = 0
-            lon = 0
         # handle form submission
         if request.method == 'POST':
             # Get everything from form
@@ -69,31 +61,18 @@ def new_transaction(request):
                 price = cd['price']
                 shop = cd['shop']
                 notes = cd['notes']
-                image = request.FILES.get('user_image')
                 bing_image = cd['bing_image']
-                lat = request.POST.get('manual-lat', 0)
-                lon = request.POST.get('manual-lon', 0)
-                if lat != None:
-                    t = Transaction(date= now, strdate = strnow, item = item, price = price, shop= shop, notes = notes, lat = lat, lon = lon)
-                    # set either image or bing image
-                    if image:
-                        t.image = image
-                    else:
-                        t.bing_image = bing_image
-                    t.save()
-                    success = True
-                    return render(request, 'new_transaction.html', {'success': success})
-                else:
-                    # return a null location error
-                    location_null = True
-                    form = TransactionForm()
-                    lat = j['latitude']
-                    lon = j['longitude']
-                    return render(request, 'new_transaction.html', {'form': form, 'location_null':location_null, 'lat': lat, 'lon': lon})
+                address = request.POST.get('address')
+                lat = request.POST.get('manual-lat')
+                lon = request.POST.get('manual-lon')
+                t = Transaction(date= now, strdate = strnow, item = item, price = price, shop= shop, notes = notes, address = address, bing_image = bing_image, lat= lat, lon = lon)
+                t.save()
+                success = True
+                return render(request, 'new_transaction.html', {'success': success})
         else:
             # not POST, render form
             form = TransactionForm()
-            return render(request, 'new_transaction.html', {'form': form, 'lat': lat, 'lon': lon})
+            return render(request, 'new_transaction.html', {'form': form})
     else:
         # not logged in, render login
         return render(request, 'login.html', {'user_login': 'transactions:user_login'})
@@ -188,7 +167,8 @@ def thing(request):
     random_idx = random.randint(0, Transaction.objects.count() - 1)
     random_obj = Transaction.objects.all()[random_idx]
     transaction = random_obj
-    return render(request, 'transaction_thing.html', {'transaction': transaction })
+    form = MailerForm()
+    return render(request, 'transaction_thing.html', {'transaction': transaction, 'form': form })
 
 def guiltfeed(request):
     if request.method == 'POST':
@@ -202,13 +182,14 @@ def guiltfeed(request):
         for word in guiltwords:
             word_links = word.links.all()
             for link in word_links:
-                if link.title:
+                if len(link.title) > 0 and len(link.image_url) > 0:
                     jsonlink = {}
                     jsonlink["link"] = link.link
                     jsonlink["title"] = link.title
                     jsonlink["description"] = link.description
                     jsonlink["image_url"] = link.image_url
                     links.append(jsonlink)
+        links = sorted(links, key=lambda x: random.random())
         return JsonResponse(links, safe=False)
 
 def change(request):
@@ -231,23 +212,19 @@ def change(request):
         for link in word_links:
             links.append(link.link)
     # get either an image file url or a bing link
-    if transaction.image:
-        image_url = transaction.image.url
-    else:
-        image_url = None
     if transaction.bing_image:
         bing_image = transaction.bing_image
     else:
         bing_image = None
     # sort the transaction data in a dictionary and throw back with json
     data_set = {'tran_id': transaction.id,
-                'strdate': transaction.strdate,
+                'strdate': str(transaction.date),
                 'item': transaction.item,
                 'price': transaction.price,
                 'shop': transaction.shop,
-                'image_url': image_url,
                 'bing_image': bing_image,
-                'lat': transaction.lat,
-                'lon': transaction.lon,
+                'address': transaction.address,
+                'lat' : transaction.lat,
+                'lon' : transaction.lon,
                 'notes': transaction.notes, }
     return JsonResponse(data_set)

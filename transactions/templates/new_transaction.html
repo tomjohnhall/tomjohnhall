@@ -41,10 +41,6 @@
     {{ form.shop }}
     {{ form.shop.errors }} </div>
     </div>
-    <div class="form-section">
-      <span> Image: </span>
-      <div class="form-field">
-    <input type="file" name="user_image" accept="image" ></div>
     </div>
     <div class="form-section">
       <span> Bing Pics </span>
@@ -74,24 +70,24 @@
     <div class="form-section">
       <span> Location: </span>
 
-      <div class="form-field"> <input type="text" id="us2-address" style="width: 200px"/> </div>
+      <div class="form-field"> <input type="text" id="us2-address" style="width: 200px" name="address" /> </div>
     </div>
     <div class="form-section">
       <div id="location-picker" style="width: 500px; height: 400px;"></div>
     </div>
-    <div class="form-section">
+    <div class="form-section" style="display:none">
       <span> Lat: </span>
-      <div class="form-field"> <input type="text" id="us2-lat" name="manual-lat"/> </div>
+      <div class="form-field" > <input type="text" id="us2-lat" name="manual-lat"/> </div>
     </div>
-    <div class="form-section">
+    <div class="form-section" style="display:none">
       <span> Lon: </span>
-      <div class="form-field"> <input type="text" id="us2-lon" name="manual-lon"/> </div>
+      <div class="form-field" > <input type="text" id="us2-lon" name="manual-lon"/> </div>
     </div>
 <script>
     $('#location-picker').locationpicker({
         location: {
-            latitude: {{ lat }},
-            longitude: {{ lon }}
+            latitude: 0,
+            longitude: 0
         },
         radius : 1,
         inputBinding: { locationNameInput: $('#us2-address'),

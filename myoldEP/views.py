@@ -6,6 +6,7 @@ from urllib2 import urlopen
 from urllib2 import Request
 import random
 import re
+from mailer.forms import MailerForm
 
 # Create your views here.
 

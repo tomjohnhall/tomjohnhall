@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css?family=Fascinate+Inline|Hind|Raleway|Space+Mono|Merriweather" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'transactions/css/transactions-thing.css' %}">
+  <link rel="stylesheet" href="{% static 'transactions/css/merchant-copy.css' %}">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
   <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
@@ -22,6 +23,7 @@
 
 
 {% include "site_menu.html" %}
+
 
 <body>
 <div id="thing-wrapper">
@@ -75,8 +77,8 @@
 
           <img id="tomjohnhallsplash" src="{% static 'img/TJH_letters.png' %}" />
           <h1> Transactions: </h1>
-          <p> A geo-financial random sampling of transactional guilt, with a song. </p>
-          <p style="font-size: 90%;"> Instructions: Click / tap for more. Hit the horns for autopilot. </p>
+          <p> Come folding receipts, come crumpling soul, life's but a feast of mind in a hole. </p>
+          <p style="font-size: 90%;"> Instructions: Hit the arrow. Hit the horns for autopilot. </p>
           <button class="play-button blank-button" onclick="player(document.getElementById('song')); closeSplash(); return false;">
             <img id="just-play" src="{% static 'transactions/img/play.png' %}" />
           </button>
@@ -85,26 +87,25 @@
     </div>
   </div>
 
+<style>
+.transaction {
+  font-family: 'Merchant Copy';
+  text-align: center;
+}
+</style>
 
-  <div class="row big-row">
-    <div class="col-sm-1 sidebar">
-      <button><img src="" alt=""></button>
-      <button><img src="" alt=""></button>
-    </div>
-    <div class="col-sm-7 col-xs-11 big-col">
+<div class="container-fluid" id="main-container">
+  <div class="row">
+    <div class="col-xs-12">
         <div class="col-sm-12" id="transaction-feed">
+          <div class="col-sm-11" id="map-wrap">
+              <div id="map"></div>
+          </div>
+            <div id="loading"> <img style="width: 40px" src="{% static 'img/loading.svg' %}" /> </div>
         </div>
     </div>
-    <div class ="col-sm-4 col-xs-11 guilt-col">
-      <div id="guiltfeed-container">
-        <div id="loading"> <img style="width: 40px" src="{% static 'img/loading.svg' %}" /> </div>
-        <div id="guiltfeed">
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-11" id="map-wrap">
-        <div id="map"></div>
-    </div>
+</div>
+
     {% csrf_token %}
   </div>
 
@@ -121,8 +122,6 @@
   </div>
 
   <script src="http://maps.google.com/maps/api/js?key=AIzaSyAdzJbLmVPAW4JUWICdAtvWdRUlnK6TrWU"></script>
-  <script src="https://hammerjs.github.io/dist/hammer.js"></script>
-  <script src="{% static 'js/jquery.hammer.js' %}"></script>
   <script src= " {% static 'transactions/js/transactions.js' %} " ></script>
   <script src= "{% static 'js/menu.js' %}" > </script>
   <script>
