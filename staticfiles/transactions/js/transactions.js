@@ -2,11 +2,9 @@
 // guiltwords associated with that transaction, which itself has a selection of guiltlinks, which are displayed in the
 // DOM in a duplicate-safe feed.
 
-// A list for links added to feed to catch duplicates
-var addedLinks = [];
 
 // The function needs a transaction id to get started
-function guiltfeed(id) {
+function guiltfeed(id, div) {
   $.ajax({
     url : "guilt/", // links to a django view for dumping data
     type : "POST",
@@ -22,29 +20,20 @@ function guiltfeed(id) {
       var image_url = '';
       var prepender = '';
       // loop through guilt links
-      for (i = 0; i < links.length; i++) {
+      for (i = 0; i < 3; i++) {
           var link = links[i];
           // check if link has already been added to feed
-          if (addedLinks.indexOf(link.link) == -1) {
             // everything gets compiled into html elements
             image = '<div class="guilt-img-container"><img class="guilt-img" src="' + link.image_url + '"></div>' ;
             hyperlink = '<a href="' + link.link + '" target ="_blank">' ;
             title = '<h2 class="guilt-title">' + link.title + '</h2></a>' ;
             description = '<p class="guilt-description">' + link.description + '</p>' ;
             // Now we have a full block of html to add to the feed as an article element
-            prepender = '<div class="guilt-item">' + image + hyperlink + title + description + '</div>' ;
-            var $prepender = $(prepender)
+            prepender = '<div class="guilt-item col-xs-12 col-sm-4">' + image + hyperlink + title + description + '</div>' ;
+            var $prepender = $(prepender);
             $('#loading').fadeOut();
             // add to top of feed
-            $prepender.hide().prependTo('#guiltfeed').slideDown(600);
-
-            // add link to addedLinks to prevent duplicates
-            // ** note to self:wouldn't it be restrictive if things NEVER repeat? **
-            addedLinks.push(link.link);
-            }
-          // caught repeats
-          else {
-          }
+            $prepender.hide().appendTo(div).slideDown(600);
         }
     }
 });
@@ -64,245 +53,7 @@ function initMap(lat,lon) {
     zoom: 14,
     center: newpoint,
     disableDefaultUI: true,
-    styles: [
-  {
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#242f3e"
-      }
-    ]
-  },
-  {
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#746855"
-      }
-    ]
-  },
-  {
-    "elementType": "labels.text.stroke",
-    "stylers": [
-      {
-        "color": "#242f3e"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative.land_parcel",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative.locality",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#d59563"
-      }
-    ]
-  },
-  {
-    "featureType": "poi",
-    "elementType": "labels.text",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "poi",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#d59563"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.business",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#263c3f"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#6b9a76"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#38414e"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "color": "#212a37"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "labels.icon",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#9ca5b3"
-      }
-    ]
-  },
-  {
-    "featureType": "road.arterial",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#746855"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "color": "#1f2835"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#f3d19c"
-      }
-    ]
-  },
-  {
-    "featureType": "road.local",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road.local",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "transit",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "transit",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#2f3948"
-      }
-    ]
-  },
-  {
-    "featureType": "transit.station",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#d59563"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#17263c"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#515c6d"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "labels.text.stroke",
-    "stylers": [
-      {
-        "color": "#17263c"
-      }
-    ]
-  }
-],
+    styles: [],
       });
 
   // make a marker
@@ -407,36 +158,22 @@ function swap() {
 
       // the data set is basically a js replica of a Transaction python object
       success : function(data_set) {
-          var grid = ['#top-left', '#top-mid', '#top-right', '#bottom-right'];
-          grid = shuffle(grid);
+          operator = getRandomInt(120453, 999999);
           // so go ahead and replace the stuff
-          var title = '<h1 class="transaction-title"> Transaction #' + data_set.tran_id + '</h1> <p class="item">' + data_set.item + '</p> <p class="shop">' + data_set.shop + '</p>' ;
-          var price = '<h1 class="price"> £ ' + data_set.price + '</h1> <p class="date">' + data_set.strdate + '</p>';
-          var notes = '<p class="notes">' + data_set.notes + '</p>';
-          $('.transaction').fadeTo(200, 0, function() {
-          $(grid[0]).children('.nano-content').html(title);
-          $(grid[1]).children('.nano-content').html(price);
+          head = '<p class="transaction-shop">' + data_set.shop  + '</p> <p class="transaction-address">' + data_set.address + '</p>' + '<div class="transaction-dashed"> <p class="transaction-operator"> OPERATOR: ' + operator + '</p> <p class="transaction-id"> #tr00' + data_set.tran_id + '</p> </div>  <p class="transaction-date">' + data_set.strdate + '</p>';
+          body = '<div class="transaction-list"> <p class="transaction-item">' + data_set.item + '</p> <p class="transaction-price"> £ ' + data_set.price + '</p> <p class="transaction-total"> TOTAL: £' + data_set.price + '</p></div> <p class="transaction-card"> PAYMENT: VISA ************' + getRandomInt(1111,9999) + '<p class="transaction-notes"> - Thank you for your custom - <br> - ' + data_set.notes + ' - </p>';
           // check for image because otherwise we'll end up with broken image elements on the page
-          if (data_set.image_url != null) {
-            var image_html = '<img class="transaction_image" src="' + data_set.image_url + '">';
-            $(grid[2]).children('.nano-content').html(image_html);
-           }
-          else if (data_set.bing_image != null) {
-            var image_html = '<img class="transaction_image" src="' + data_set.bing_image + '">';
-            $(grid[2]).children('.nano-content').html(image_html);
-           }
-          else {
-          // if no image, just get rid of the thing altogether
-            $(grid[2]).children('.nano-content').html('');
-            }
-          $(grid[3]).children('.nano-content').html(notes);
-          mixPage();
-          });
-          $('.transaction').fadeTo(400, 1);
+
+          background = randomColour();
+          transaction = '<div class="transaction" style="background-color: ' + background + '"><div class="transaction-receipt">' + head +  body + '</div><div style="clear: both"></div></div>';
+          $transaction = $(transaction);
+          $transaction.hide().prependTo('#transaction-feed').slideDown(600);
           addLatLng(data_set.lat, data_set.lon);
           // pass the id to guiltfeed
           tran_id = data_set.tran_id;
-          guiltfeed(tran_id);
+          $guilt = $('<div>', {'class': 'row'});
+          $guilt.appendTo($transaction);
+          guiltfeed(tran_id, $guilt);
       }
 });
 };
@@ -465,7 +202,7 @@ function getRandomInt(min, max) {
 // mixPage function - various visual trickery
 
 
-function mixPage() {
+function randomColour() {
   /* Random background color */
   var background = '#000000';
   var randomEight = getRandomInt(0,8);
@@ -475,12 +212,9 @@ function mixPage() {
       var randomEightTwo = getRandomInt(0,8);
     }
   }
-  var colors = ['#deb0d5', '#bacef1', '#a0d1a9', '#afb8d1', '#c2aecf', '#e9a9dd', '#ecb7b7', '#f4eea9' ] ;
+  var colors = ['rgba(222, 176, 213, 0.47)', 'rgba(186, 206, 241, 0.31)', 'rgba(160, 209, 169, 0.43)', 'rgba(#afb8d1, 0.3)', 'rgba(#c2aecf, 0.31)', 'rgba(#e9a9dd, 0.31)', 'rgba(#ecb7b7, 0.35)', 'rgba(#f4eea9, 0.34)' ] ;
   background = colors[randomEight] ;
-  $('body').css('background', background);
-  /* Random Fonts */
-  var fonts = [];
-
+  return background
 }
 
 /*
@@ -523,7 +257,7 @@ $(document).ajaxStart(function () {
 
 $(document).ready(function(){
   $('#loading').hide();
-  $('.nano').nanoScroller();
+
 });
 
 // HANDLE EVENTS
@@ -546,7 +280,7 @@ function isMobile() {
     });
   }
     else {
-      $('.transaction').click( function() {
+      $('#transaction-feed').click( function() {
           swap();
       });
     }

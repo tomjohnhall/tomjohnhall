@@ -25,9 +25,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = ['localhost', 'localhost:8000', 'tomjohnhall.com', 'www.tomjohnhall.com', 'desolate-savannah-85315.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'localhost:5000', 'tomjohnhall.com', 'www.tomjohnhall.com', 'desolate-savannah-85315.herokuapp.com']
 
 
 # Application definition
@@ -46,6 +46,9 @@ INSTALLED_APPS = (
     'transactions',
     'bootstrap3',
     'myoldEP',
+    'modernghosts',
+    'mailer',
+    'phonenumber_field',
 )
 
 

@@ -18,7 +18,7 @@
 <h1> TRANSACTION #{{ transaction.id }} </h1>
 <p> <span> Date: </span> {{ transaction.date }} </p>
 <p> <span> Item: </span> {{ transaction.item }} </p>
-<p> <span> Shop: </span> {{ transaction.shop }} </p>
+<p> <span> Shop: </span> {{ transaction.shop }} , {{ transaction.address }}</p>
 <p> <span> Price: </span> <span>   £</span> {{ transaction.price }} </p>
 {% if transaction.image %}
   <p> <span> Image: </span> <img src= " {{ transaction.image.url }} " style="width: 500px;" /> </p>

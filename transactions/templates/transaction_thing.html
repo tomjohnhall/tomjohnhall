@@ -8,22 +8,22 @@
   <link href="https://fonts.googleapis.com/css?family=Fascinate+Inline|Hind|Raleway|Space+Mono|Merriweather" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'transactions/css/transactions-thing.css' %}">
-  <link rel="stylesheet" href="{% static 'css/nanoscroller.css' %}">
+  <link rel="stylesheet" href="{% static 'transactions/css/merchant-copy.css' %}">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
   <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/menu.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/player.js' %}"></script>
   <script src="{% static 'js/jquery.ui.touch-punch.min.js' %}"></script>
-  <script src="{% static 'js/jquery.nanoscroller.min.js' %}"></script>
 
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 
   <title> Transactions by Tom John Hall </title>
-</head>
+
 
 {% include "site_menu.html" %}
+
 
 <body>
 <div id="thing-wrapper">
@@ -32,7 +32,7 @@
         <div class="row no-gutters full-height">
 
             <audio id="song" preload="auto">
-              <source src="http://www.saxonhouse.co/filedump/song.mp3" type="audio/mp3" />
+              <source src="{% static 'transactions/audio/song.mp3' %}" type="audio/mp3" />
             </audio>
             <div class="menu-button">
               <button class="blank-button full-height">
@@ -77,8 +77,8 @@
 
           <img id="tomjohnhallsplash" src="{% static 'img/TJH_letters.png' %}" />
           <h1> Transactions: </h1>
-          <p> A geo-financial random sampling of transactional guilt, with a song. </p>
-          <p style="font-size: 90%;"> Instructions: Click / Swipe for another. Hit the horns for autopilot. </p>
+          <p> Come folding receipts, come crumpling soul, life's but a feast of mind in a hole. </p>
+          <p style="font-size: 90%;"> Instructions: Hit the arrow. Hit the horns for autopilot. </p>
           <button class="play-button blank-button" onclick="player(document.getElementById('song')); closeSplash(); return false;">
             <img id="just-play" src="{% static 'transactions/img/play.png' %}" />
           </button>
@@ -87,56 +87,29 @@
     </div>
   </div>
 
+<style>
+.transaction {
+  font-family: 'Merchant Copy';
+  text-align: center;
+}
+</style>
 
-  <div class="row big-row">
-    <div class="col-sm-9 big-col">
-      <div class="row little-row first-row">
-        <div class="col-sm-4 col-xs-6 transaction grid-box nano" id="top-left">
-          <div id="title-item-shop" class="nano-content">
-            <h1 class ="transaction-title"> Transaction #{{ transaction.id }} </h1>
-            <p class ="item">{{ transaction.item }}</p>
-            <p class="shop">{{ transaction.shop }}</p>
+<div class="container-fluid" id="main-container">
+  <div class="row">
+    <div class="col-xs-12">
+        <div class="col-sm-12" id="transaction-feed">
+          <div class="col-sm-11" id="map-wrap">
+              <div id="map"></div>
           </div>
+            <div id="loading"> <img style="width: 40px" src="{% static 'img/loading.svg' %}" /> </div>
         </div>
-        <div class="col-sm-4 col-xs-6 transaction grid-box nano" id="top-mid">
-          <div id="price-date" class="nano-content">
-            <p class="price"> £ {{ transaction.price }}</p>
-            <p class="date">{{ transaction.strdate }}</p>
-          </div>
-        </div>
-        <div class="col-sm-4 col-xs-6 transaction grid-box nano" id="top-right">
-          <div id="image" class="nano-content">
-            {% if transaction.image %}
-              <img class="transaction_image" src="{{ transaction.image_url }}" />
-            {% elif transaction.bing_image %}
-              <img class="transaction_image" src="{{ transaction.bing_image }}" />
-            {% endif %}
-          </div>
-        </div>
-      </div>
-      <div class="row little-row second-row">
-        <div class="col-sm-4 col-xs-6 transaction grid-box nano" id="bottom-right">
-          <div id="notes" class="nano-content">
-            <p class="notes">{{ transaction.notes }}</p>
-          </div>
-        </div>
-        <div class="col-sm-8 col-xs-12 grid-box nano" id="bottom-left">
-            <div id="map" class="nano-content"></div>
-        </div>
-      </div>
+    </div>
+</div>
 
-    </div>
-    <div class ="col-sm-3 col-xs-12 guilt-col nano">
-      <div id="guiltfeed-container" class="nano-content">
-        <div id="loading"> <img style="width: 40px" src="{% static 'img/loading.svg' %}" /> </div>
-        <div id="guiltfeed">
-        </div>
-      </div>
-    </div>
     {% csrf_token %}
   </div>
 
-</div>
+
 
 <footer class="footer">
 
@@ -149,21 +122,20 @@
   </div>
 
   <script src="http://maps.google.com/maps/api/js?key=AIzaSyAdzJbLmVPAW4JUWICdAtvWdRUlnK6TrWU"></script>
-  <script src="https://hammerjs.github.io/dist/hammer.js"></script>
-  <script src="{% static 'js/jquery.hammer.js' %}"></script>
   <script src= " {% static 'transactions/js/transactions.js' %} " ></script>
   <script src= "{% static 'js/menu.js' %}" > </script>
   <script>
   isMobile();
   prep_ajax();
-  mixPage();
   var map;
   var poly;
+  swap();
   initMap({{ transaction.lat }}, {{transaction.lon }});
   guiltfeed({{transaction.id}});
 
   </script>
 
 </footer>
+</div>
 </body>
 </html>

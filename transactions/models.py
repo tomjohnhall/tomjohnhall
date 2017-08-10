@@ -25,16 +25,17 @@ class GuiltWord(models.Model):
 
 
 class Transaction(models.Model):
-    date = models.DateField(blank=True, null=True)
+    date = models.DateTimeField(blank=True, null=True)
     strdate = models.CharField(max_length=30, blank=True, null=True)
     item = models.CharField(max_length=50)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     shop = models.CharField(max_length=50, blank=True, null=True)
     image = models.ImageField(upload_to = 'image', blank=True, null=True)
-    bing_image = models.CharField(max_length=900, blank=True, null=True)
-    lat = models.FloatField(null=True)
-    lon = models.FloatField(null=True)
-    notes = models.CharField(max_length=999, blank=True, null=True)
+    bing_image = models.CharField(max_length=255, blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
+    lat = models.FloatField(blank=True, null=True)
+    lon = models.FloatField(blank=True, null=True)
+    notes = models.TextField(blank=True, null=True)
     guiltwords = models.ManyToManyField(GuiltWord)
 
     def __str__(self):
