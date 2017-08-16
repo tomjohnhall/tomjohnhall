@@ -179,6 +179,7 @@ h1 {
 }
 
 .transaction-receipt {
+  position: relative;
   max-width: 500px;
   margin: auto;
 }
@@ -237,6 +238,16 @@ h1 {
   margin-bottom: 15px;
 }
 
+.transaction-image {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100px;
+  border: 1px solid #575c73;
+  box-shadow: 1px 5px 5px #888888
+}
+
 /* Margins for bigger screens */
 @media(min-width:768px){
   .transaction-card, .transaction-item {
@@ -247,16 +258,35 @@ h1 {
   }
 }
 
-
-
-
 #map-container {
-  height: 100%;
-  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 0;
+  width: 500px;
+  box-shadow: 8px -5px 10px #bdbbbb;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+#map-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 5;
 }
 
 #map {
-  opacity: 1;
+  height: 100%;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+ }
+
+ #map-button {
+   position: fixed;
+   left: 0;
+   bottom: 0;
  }
 
 
@@ -301,9 +331,6 @@ h1 {
 
 /* MAP */
 
-#map-wrap {
-  display: none;
-}
 
 
 

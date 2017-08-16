@@ -125,6 +125,16 @@ function addLatLng(lat,lon) {
   map.panTo(newpoint);
   }
 
+function showMap() {
+  $('#map-container').animate({height: '300px'}, 400, function() {
+    google.maps.event.trigger(map, 'resize');
+    });
+  }
+
+function hideMap() {
+  $('#map-container').animate({height: '0'}, 400);
+  }
+
 // SWAP - The main event. Swap incorporates all of the above to essentially replace the bulk of data in the DOM without
 // refreshing. The transaction is swapped out, guiltfeed updated and map given a new marker.
 
@@ -160,11 +170,13 @@ function swap() {
       success : function(data_set) {
           operator = getRandomInt(120453, 999999);
           // so go ahead and replace the stuff
+          image = '<img class="transaction-image" src="' + data_set.bing_image + '" />'
           head = '<p class="transaction-shop">' + data_set.shop  + '</p> <p class="transaction-address">' + data_set.address + '</p>' + '<div class="transaction-dashed"> <p class="transaction-operator"> OPERATOR: ' + operator + '</p> <p class="transaction-id"> #tr00' + data_set.tran_id + '</p> </div>  <p class="transaction-date">' + data_set.strdate + '</p>';
-          body = '<div class="transaction-list"> <p class="transaction-item">' + data_set.item + '</p> <p class="transaction-price"> £ ' + data_set.price + '</p> <p class="transaction-total"> TOTAL: £' + data_set.price + '</p></div> <p class="transaction-card"> PAYMENT: VISA ************' + getRandomInt(1111,9999) + '<p class="transaction-notes"> - Thank you for your custom - <br> - ' + data_set.notes + ' - </p>';
+          body = '<div class="transaction-list"> <p class="transaction-item">' + data_set.item + '</p> <p class="transaction-price"> £ ' + data_set.price + '</p> <p class="transaction-total"> TOTAL: £' + data_set.price + '</p>' + image + '</div> <p class="transaction-card"> PAYMENT: VISA ************' + getRandomInt(1111,9999) + '<p class="transaction-notes"> - Thank you for your custom - <br> - ' + data_set.notes + ' - </p>';
           // check for image because otherwise we'll end up with broken image elements on the page
 
           background = randomColour();
+
           transaction = '<div class="transaction" style="background-color: ' + background + '"><div class="transaction-receipt">' + head +  body + '</div><div style="clear: both"></div></div>';
           $transaction = $(transaction);
           $transaction.hide().prependTo('#transaction-feed').slideDown(600);
@@ -257,7 +269,19 @@ $(document).ajaxStart(function () {
 
 $(document).ready(function(){
   $('#loading').hide();
+  $('.transaction-item').mouseenter(function () {
+    console.log('mouse enter');
+    $(this).siblings('.transaction-image').fadeIn();
+  });
+  $('.transaction-item').mouseleave(function() {
+    $(this).siblings('.transaction-image').fadeOut();
+  });
+});
 
+$(document).on('mouseenter', ".transaction-item", function() {
+     $(this).siblings('.transaction-image').fadeIn("fast");
+}).on('mouseleave', ".transaction-item", function() {
+     $(this).siblings('.transaction-image').fadeOut("fast");
 });
 
 // HANDLE EVENTS

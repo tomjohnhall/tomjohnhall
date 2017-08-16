@@ -33,7 +33,11 @@ def user_login(request):
     if user is not None:
         request.session['logged_in'] = True
         login(request, user)
-        return HttpResponseRedirect(reverse_lazy('transactions:new_transaction'))
+        if request.GET.get('destination'):
+            destination = 'transactions:' + request.GET.get('destination')
+            return HttpResponseRedirect(reverse_lazy(destination))
+        else:
+            return HttpResponseRedirect(reverse_lazy('transactions:new_transaction'))
     else:
         error = 'Invalid'
         return render(request, 'login.html', {'user_login': 'transactions:user_login', 'error': error})
@@ -75,7 +79,7 @@ def new_transaction(request):
             return render(request, 'new_transaction.html', {'form': form})
     else:
         # not logged in, render login
-        return render(request, 'login.html', {'user_login': 'transactions:user_login'})
+        return render(request, 'login.html', {'user_login': 'transactions:user_login', 'destiantion': 'new_transaction'})
 
 def latest_transaction(request):
     transaction = Transaction.objects.all().order_by('-id')
@@ -107,34 +111,24 @@ def transaction_detail(request, transaction_id):
     return render(request, 'transaction_detail.html', {'transaction': transaction, 'prev_tran': prev_tran, 'next_tran': next_tran, 'links': links})
 
 def soup(request):
-    # get all the links
-    guiltlinks = GuiltLink.objects.all()
-    # init lists for soup parts and failures
-    titles = []
-    descriptions = []
-    images = []
-    exceptions = []
-    for link in guiltlinks:
-        # test if the link has already been souped
-        if link.title:
-            pass
-        else:
-            # try soup step by step and throw exceptions in the exception list
+    if request.session.has_key('logged_in'):
+        guiltlink_list = GuiltLink.objects.all().order_by('-id')
+        if request.method == 'POST':
+            guiltlink_id = int(request.POST.get('guiltlink_id'))
+            link = GuiltLink.objects.get(id=guiltlink_id)
+            exceptions = []
+            results = {}
             try:
                 page = urlopen(link.link)
             except Exception, e:
-                exceptions.append(link.link)
-                exceptions.append(str(Exception))
-                continue
-            try:
-                USERAGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'
-                HEADERS = {'User-Agent': USERAGENT}
-                req = Request(link.link, headers=HEADERS)
-                page = urlopen(req)
-            except Exception, e:
-                exceptions.append(link.link)
-                exceptions.append(str(Exception))
-                continue
+                exceptions.append('Exception at first, so needed headers')
+                try:
+                    USERAGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'
+                    HEADERS = {'User-Agent': USERAGENT}
+                    req = Request(link.link, headers=HEADERS)
+                    page = urlopen(req)
+                except Exception, e:
+                    exceptions.append('Exception with or without headers')
             try:
                 soup = BeautifulSoup(page.read(), "html.parser")
                 title = soup.find("meta", property="og:title")
@@ -142,24 +136,25 @@ def soup(request):
                 image_url = soup.find("meta", property="og:image")
                 if title:
                     link.title = title["content"]
-                    titles.append(title["content"])
                 else:
                     title = soup.find("title")
                     if title:
                         link.title = str(title)
-                        titles.append(title)
                 if description:
                     link.description = description["content"]
-                    descriptions.append(description["content"])
                 if image_url:
                     link.image_url = image_url["content"]
-                    images.append(image_url["content"])
                 link.save()
+                results['title'] = link.title
+                results['description'] = link.description
+                results['image_url'] = link.image_url
             except Exception, e:
-                exceptions.append(link.link)
-                exceptions.append(str(Exception))
-                continue
-    return render(request, 'soup.html', {'exceptions': exceptions, 'titles': titles, 'descriptions': descriptions, 'images': images})
+                    exceptions.append('Couldn\'t complete the soup.')
+            return render(request, 'soup.html', {'guiltlinks': guiltlink_list, 'exceptions': exceptions, 'results': results, 'link_id': link.id})
+        else:
+            return render(request, 'soup.html', {'guiltlinks': guiltlink_list})
+    else:
+        return render(request, 'login.html', {'user_login': 'transactions:user_login', 'destination': 'soup'})
 
 
 def thing(request):

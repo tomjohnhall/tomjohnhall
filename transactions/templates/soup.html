@@ -1,14 +1,70 @@
+{% load static %}
+{% load bootstrap3 %}
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="{% static 'js/menu.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+  <title>Soup Your Links</title>
 </head>
+
 <body>
-  <p> The following bits were added: </p>
-  <p> {{ titles }} </p>
-  <p> {{ descriptions }} </p>
-  <p> {{ images }} </p>
-  <p> The following links failed: <p>
-  <p> {{ exceptions }} </p>
+  <nav class="navbar navbar-default navbar-fixed-top" id="navbar">
+    <div class="container">
+      <div id="nav-header">
+        <img id="tomjohnhall" src="{% static 'img/TJH_letters.png' %}" />
+      </div>
+      <div id="nav-right">
+        <button class="menu-button blank-button"> <img id="menu-button-icon" src="{% static 'img/start_menu_shortcuts.ico' %}" /> </button>
+      </div>
+  </nav>
+  <div class="container">
+  {% include "site_menu.html" with nomailer="True" %}
+  <h1 style="text-align: center"> Guilt Links </h1>
+  <script>
+  var form = document.getElementById('form');
+  function submitForm() {
+    form.submit();
+  }
+  function soup(id) {
+    document.getElementById('guiltlink_id').value = id;
+    submitForm();
+  }
+  </script>
+  <form id="form" method="post">
+    <input id="guiltlink_id" name="guiltlink_id" type="hidden"></input>
+    <ul class="list-group">
+      {% for link in guiltlinks %}
+        <li class ="list-group-item">
+        <span style="color: {% if link.title %} green {% else %} red {% endif %}">{{ link.link }} </span>
+        <button class="btn btn-default pull-right" onclick="soup({{ link.id }})"> Soup </button>
+        <div style="clear: both"></div>
+
+      {% if link_id == link.id %}
+        {% if results %}
+          <p> Success! Here's what happened: </p>
+          {% if results.title %}
+          <p> Title: {{ results.title }} </p> {% endif %}
+          {% if results.description %}
+          <p> Description: {{ results.description }} </p> {% endif %}
+          {% if results.image_url %}
+          <p> Image_url: {{ results.image_url }} </p> {% endif %}
+        {% endif %}
+        {% if exceptions %}
+        {% for exception in exceptions %}
+          <p> Exception: {{ exception }} </p>
+        {% endfor %}
+        {% endif %}
+      {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% csrf_token %}
+  </form>
+</div>
 </body>
 </html>

@@ -17,3 +17,28 @@
    padding-right: 0;
    padding-left: 0;
 }
+
+#tomjohnhall {
+  width: 100%;
+  padding: 5px;
+}
+
+#menu-button-icon {
+  padding: 5px;
+}
+
+#navbar {
+  width: 100%;
+}
+
+#nav-header {
+  max-width: 150px;
+  display: inline-block;
+  float: left;
+}
+
+#nav-right {
+  max-width: 150px;
+  position: absolute;
+  right: 15px;
+}

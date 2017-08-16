@@ -134,5 +134,6 @@
 
 
 </style>
-
+{% if not nomailer %}
 {% include "mailing_list.html" %}
+{% endif %}

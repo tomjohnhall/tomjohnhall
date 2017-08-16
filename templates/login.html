@@ -10,7 +10,7 @@
   {% if logged_out %}
     <p> {{ logged_out }} </p>
   {% endif %}
-  <form action= "{% url user_login %}" method="POST">
+  <form action= "{% url user_login %}{% if destination %}?destination={{ destination }}{% endif %}" method="POST">
     <p> <span> Username: </span> <input type="text" name="username"> <p>
     <p> <span> Password: </span> <input type="password" name="password"> <p>
     <p> <input type="submit" value="Login"> </p>

@@ -98,12 +98,17 @@
   <div class="row">
     <div class="col-xs-12">
         <div class="col-sm-12" id="transaction-feed">
-          <div class="col-sm-11" id="map-wrap">
-              <div id="map"></div>
-          </div>
             <div id="loading"> <img style="width: 40px" src="{% static 'img/loading.svg' %}" /> </div>
         </div>
     </div>
+  </div>
+  <div id="map-button">
+    <button class="btn" style="opacity: 0.8" onclick="showMap()"><img src="{% static 'img/location.png' %}" style="height: 30px;"></button>
+  </div>
+  <div id="map-container">
+    <button id="map-close" class="btn btn-default" onclick="hideMap()">X</button>
+    <div id="map"></div>
+  </div>
 </div>
 
     {% csrf_token %}
