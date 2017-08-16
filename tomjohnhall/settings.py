@@ -49,6 +49,8 @@ INSTALLED_APPS = (
     'modernghosts',
     'mailer',
     'phonenumber_field',
+    'lxml',
+    'html5lib',
 )
 
 

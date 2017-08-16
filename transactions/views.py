@@ -10,6 +10,8 @@ import datetime
 import requests
 import random
 import json
+import html5lib
+import lxml
 from urllib2 import urlopen
 from urllib2 import Request
 from bs4 import BeautifulSoup
@@ -118,38 +120,57 @@ def soup(request):
             link = GuiltLink.objects.get(id=guiltlink_id)
             exceptions = []
             results = {}
+            def soupArticle(soup, link):
+                title = soup.find_all("meta", property="og:title")
+                description = soup.find_all("meta", property="og:description")
+                image_url = soup.find_all("meta", property="og:image")
+                if title:
+                    link.title = title[0]["content"]
+                else:
+                    title = soup.find("title")
+                    if title:
+                        link.title = str(title)
+                    else:
+                        exceptions.append('no title')
+                if description:
+                    link.description = description[0]["content"]
+                else:
+                    exceptions.append('no description')
+                if image_url:
+                    link.image_url = image_url[0]["content"]
+                else:
+                    exceptions.append('no image url')
+                link.save()
+                results['title'] = link.title
+                results['description'] = link.description
+                results['image_url'] = link.image_url
+                return results
             try:
                 page = urlopen(link.link)
             except Exception, e:
-                exceptions.append('Exception at first, so needed headers')
+                exceptions.append('Exception at first, so needed headers.')
                 try:
                     USERAGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'
                     HEADERS = {'User-Agent': USERAGENT}
                     req = Request(link.link, headers=HEADERS)
                     page = urlopen(req)
                 except Exception, e:
-                    exceptions.append('Exception with or without headers')
+                    exceptions.append('Exception with without headers.')
             try:
                 soup = BeautifulSoup(page.read(), "html.parser")
-                title = soup.find("meta", property="og:title")
-                description = soup.find("meta", property="og:description")
-                image_url = soup.find("meta", property="og:image")
-                if title:
-                    link.title = title["content"]
-                else:
-                    title = soup.find("title")
-                    if title:
-                        link.title = str(title)
-                if description:
-                    link.description = description["content"]
-                if image_url:
-                    link.image_url = image_url["content"]
-                link.save()
-                results['title'] = link.title
-                results['description'] = link.description
-                results['image_url'] = link.image_url
+                soupArticle(soup, link)
             except Exception, e:
-                    exceptions.append('Couldn\'t complete the soup.')
+                exceptions.append('html.parser didn\'t work.')
+                try:
+                    soup = BeautifulSoup(page.read(), "html5lib")
+                    soupArticle(soup, link)
+                except Exception, e:
+                    exceptions.append('html5lib didn\'t work either.')
+                    try:
+                        soup = BeautifulSoup(page.read(), "lxml")
+                        soupArticle(soup, link)
+                    except Exception, e:
+                        exceptions.append('lxml didn\'t work either.')
             return render(request, 'soup.html', {'guiltlinks': guiltlink_list, 'exceptions': exceptions, 'results': results, 'link_id': link.id})
         else:
             return render(request, 'soup.html', {'guiltlinks': guiltlink_list})
