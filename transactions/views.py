@@ -16,6 +16,7 @@ from BeautifulSoup import BeautifulSoup as bs3
 from urllib2 import urlopen
 from urllib2 import Request
 from bs4 import BeautifulSoup
+from bs4.diagnose import diagnose
 from mailer.forms import MailerForm
 
 
@@ -161,7 +162,8 @@ def soup(request):
                 soup = BeautifulSoup(page.read(), "html.parser")
                 soupArticle(soup, link)
             except Exception, e:
-                exceptions.append('html.parser didn\'t work.')
+                diagnosis = diagnose(page.read())
+                exceptions.append('html.parser didn\'t work.' + diagnosis)
                 try:
                     soup = BeautifulSoup(page.read(), "html5lib")
                     soupArticle(soup, link)
