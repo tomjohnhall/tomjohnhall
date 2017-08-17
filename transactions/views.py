@@ -12,6 +12,7 @@ import random
 import json
 import html5lib
 import lxml
+from BeautifulSoup import BeautifulSoup as bs3
 from urllib2 import urlopen
 from urllib2 import Request
 from bs4 import BeautifulSoup
@@ -171,6 +172,11 @@ def soup(request):
                         soupArticle(soup, link)
                     except Exception, e:
                         exceptions.append('lxml didn\'t work either.')
+                        try:
+                            soup = bs3(page.read(), "html.parser")
+                            soupArticle(soup, link)
+                        except:
+                            exceptions.append('bs3 didn\'t work either')
             return render(request, 'soup.html', {'guiltlinks': guiltlink_list, 'exceptions': exceptions, 'results': results, 'link_id': link.id})
         else:
             return render(request, 'soup.html', {'guiltlinks': guiltlink_list})
