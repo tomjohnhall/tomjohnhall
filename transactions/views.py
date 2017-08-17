@@ -163,7 +163,7 @@ def soup(request):
                 soupArticle(soup, link)
             except Exception, e:
                 diagnosis = diagnose(page.read())
-                exceptions.append('html.parser didn\'t work.' + diagnosis)
+                exceptions.append('html.parser didn\'t work.' + str(diagnosis))
                 try:
                     soup = BeautifulSoup(page.read(), "html5lib")
                     soupArticle(soup, link)
