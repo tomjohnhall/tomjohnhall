@@ -16,6 +16,7 @@ from BeautifulSoup import BeautifulSoup as bs3
 from urllib2 import urlopen
 from urllib2 import Request
 from bs4 import BeautifulSoup
+from bs4 import SoupStrainer
 from mailer.forms import MailerForm
 
 
@@ -121,10 +122,11 @@ def soup(request):
             link = GuiltLink.objects.get(id=guiltlink_id)
             exceptions = []
             results = {}
-            def soupArticle(soup, link):
-                title = soup.find_all("meta", property="og:title")
-                description = soup.find_all("meta", property="og:description")
-                image_url = soup.find_all("meta", property="og:image")
+            only_meta = SoupStrainer("meta")
+            def soupArticle(soup, metasoup, link):
+                title = metasoup.find_all("meta", property="og:title")
+                description = metasoup.find_all("meta", property="og:description")
+                image_url = metasoup.find_all("meta", property="og:image")
                 if title:
                     link.title = title[0]["content"]
                 else:
@@ -159,22 +161,26 @@ def soup(request):
                     exceptions.append('Exception with without headers.')
             try:
                 soup = BeautifulSoup(page.read(), "html.parser")
-                soupArticle(soup, link)
+                metasoup = BeautifulSoup(page.read(), "html.parser", parse_only=only_meta)
+                soupArticle(soup, metasoup, link)
             except Exception, e:
                 exceptions.append('html.parser didn\'t work.')
                 try:
                     soup = BeautifulSoup(page.read(), "html5lib")
-                    soupArticle(soup, link)
+                    metasoup = BeautifulSoup(page.read(), "html5lib", parse_only=only_meta)
+                    soupArticle(soup, metasoup, link)
                 except Exception, e:
                     exceptions.append('html5lib didn\'t work either.')
                     try:
                         soup = BeautifulSoup(page.read(), "lxml")
-                        soupArticle(soup, link)
+                        metasoup = BeautifulSoup(page.read(), "lxml", parse_only=only_meta)
+                        soupArticle(soup, metasoup, link)
                     except Exception, e:
                         exceptions.append('lxml didn\'t work either.')
                         try:
                             soup = bs3(page.read(), "html.parser")
-                            soupArticle(soup, link)
+                            metasoup = bs3(page.read(), "html.parser", parse_only=only_meta)
+                            soupArticle(soup, metasoup, link)
                         except:
                             exceptions.append('bs3 didn\'t work either')
             return render(request, 'soup.html', {'guiltlinks': guiltlink_list, 'exceptions': exceptions, 'results': results, 'link_id': link.id})
