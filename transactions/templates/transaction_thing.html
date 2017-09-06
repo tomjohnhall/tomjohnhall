@@ -19,7 +19,7 @@
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 
-  <title> Transactions by Tom John Hall </title>
+  <title> EXPENSIVE by Tom John Hall </title>
 
 
 {% include "site_menu.html" %}
@@ -76,9 +76,9 @@
         <div class="overlay-content">
 
           <img id="tomjohnhallsplash" src="{% static 'img/TJH_letters.png' %}" />
-          <h1> Transactions: </h1>
+          <h1 id="splash-title" style="font-size: 50px;"> EXPENSIVE </h1>
           <p> Come folding receipts, come crumpling soul, life's but a feast of mind in a hole. </p>
-          <p style="font-size: 90%;"> Instructions: Hit the arrow. Hit the horns for autopilot. </p>
+          <p style="font-size: 90%;"> Instructions: Go shopping. </p>
           <button class="play-button blank-button" onclick="player(document.getElementById('song')); closeSplash(); return false;">
             <img id="just-play" src="{% static 'transactions/img/play.png' %}" />
           </button>
@@ -88,13 +88,20 @@
   </div>
 
 <style>
-.transaction {
+.transaction, #splash-title {
   font-family: 'Merchant Copy';
   text-align: center;
 }
 </style>
 
 <div class="container-fluid" id="main-container">
+  <div class="row">
+    <div id="cart" class="col-xs-12 text-center">
+      <button id="cart-btn" class="btn btn-primary">
+        <img id="cart-img" src="{% static 'transactions/img/shopping-cart.png' %}" />
+      </button>
+    </div>
+  </div>
   <div class="row">
     <div class="col-xs-12">
         <div class="col-sm-12" id="transaction-feed">

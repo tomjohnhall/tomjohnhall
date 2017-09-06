@@ -23,7 +23,7 @@
         <input type="phone_number" class="form-control" id="id_mobile">
         <p id="mobile-message" class="error-message"></p>
       </div>
-      <p> How can I use your number? (select any or all) </p>
+      <div style="display: none;">
       <div class="checkbox">
         <label class="control-label" for="id_text"><input type="checkbox" id="id_text"> Slip you a text?</label>
       </div>
@@ -34,6 +34,7 @@
         <label class="control-label" for="id_group"><input type="checkbox" id="id_group">Add me to a Whatsapp Group with everyone else and see what happens?*</label>
       </div>
       <p> *I'm not sure what this is yet but it might be nice for everyone to get together and send eachother stuff. You can leave it on mute obv. </p>
+      </div>
       {% csrf_token %}
 
       </div>

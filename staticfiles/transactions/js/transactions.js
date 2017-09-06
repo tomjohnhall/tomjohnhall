@@ -213,19 +213,20 @@ function getRandomInt(min, max) {
 
 // mixPage function - various visual trickery
 
+var background = '#ffffff';
 
 function randomColour() {
   /* Random background color */
-  var background = '#000000';
-  var randomEight = getRandomInt(0,8);
-  var randomEightTwo = getRandomInt(0,8);
-  if(randomEightTwo == randomEight) {
-    while(randomEightTwo == randomEight) {
-      var randomEightTwo = getRandomInt(0,8);
+  var randomFour = getRandomInt(0,4);
+  var colors = ['rgba(222, 176, 183, 0.45)', 'rgba(186, 206, 241, 0.29)', 'rgba(160, 209, 169, 0.31)', 'rgba(244, 238, 169, 0.31)' ] ;
+  var newbackground = colors[randomFour] ;
+  if(newbackground == background) {
+    while(newbackground == background) {
+      randomFour = getRandomInt(0,4);
+      newbackground = colors[randomFour] ;
     }
   }
-  var colors = ['rgba(222, 176, 213, 0.47)', 'rgba(186, 206, 241, 0.31)', 'rgba(160, 209, 169, 0.43)', 'rgba(#afb8d1, 0.3)', 'rgba(#c2aecf, 0.31)', 'rgba(#e9a9dd, 0.31)', 'rgba(#ecb7b7, 0.35)', 'rgba(#f4eea9, 0.34)' ] ;
-  background = colors[randomEight] ;
+  background = newbackground
   return background
 }
 
@@ -304,7 +305,7 @@ function isMobile() {
     });
   }
     else {
-      $('#transaction-feed').click( function() {
+      $('#cart-btn').click( function() {
           swap();
       });
     }
