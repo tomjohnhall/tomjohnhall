@@ -5,7 +5,7 @@
 
    // Replace the following string with the AppId you received from the
    // Bing Developer Center.
-   var AppId = "c52221222d4c47da87383c6119170610";
+   var AppId = "AIzaSyCx-izqktV2ZBYy9kT_6yvI0BMUOYHP5zg";
 
    function Search(Query) {
     var params = {
