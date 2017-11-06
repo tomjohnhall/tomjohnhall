@@ -270,6 +270,9 @@ $(document).ajaxStart(function () {
 
 $(document).ready(function(){
   $('#loading').hide();
+  $('#cart-btn').on('click touchstart', function() {
+      swap();
+  });
   $('.transaction-item').mouseenter(function () {
     console.log('mouse enter');
     $(this).siblings('.transaction-image').fadeIn();
@@ -304,11 +307,6 @@ function isMobile() {
       }
     });
   }
-    else {
-      $('#cart-btn').click( function() {
-          swap();
-      });
-    }
 
  };
 

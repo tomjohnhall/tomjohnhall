@@ -1,0 +1,57 @@
+header {
+  padding: 154px 0 100px;
+}
+
+@media (min-width: 992px) {
+  header {
+    padding: 156px 0 100px;
+  }
+}
+
+section {
+  padding: 100px 0;
+}
+
+#jumbo {
+background: #141E30;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+margin-top: 55px;
+padding-left: 20px;
+color: #acacac;
+
+}
+
+#jumbotitle {
+  font-family: 'Amatic SC', cursive;
+  font-size: 80px;
+  height:
+}
+
+#jumbosub {
+  font-family: 'Amatic SC', cursive;
+  font-size: 55px;
+}
+
+#mainNav {
+  background-color: rgba(210, 226, 221, 0.86);
+}
+
+#services {
+  padding-top: 10px;
+}
+
+.screenhosts {
+  width: 100%;
+}
+
+.desktop-screenshot {
+  width: 90%;
+}
+
+.mobile-screenshot {
+  width: 50%;
+  position: absolute;
+  top: 10%;
+  right: -9%;
+}

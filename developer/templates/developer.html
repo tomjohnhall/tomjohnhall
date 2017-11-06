@@ -1,0 +1,54 @@
+{% extends "header.html" %}
+{% block content %}
+<section id="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2 style="text-align: center">Websites, python apps, clever nonsense</h2>
+            <p class="lead">
+              I'm a self taught developer working in a variety of languages to build unique, creative web apps and
+              tidy, intuitive websites.
+            </p>
+            <p>
+                As a Music Tech student I wanted to equip myself with the tools to build a fairer music streaming service. Since then I've expanded to
+                song-apps with Django, web crawling and data composition using routine python tasks, and intelligent wordpress portfolio sites.
+            </p>
+            <p> I'm particularly (and ambitoiously) interested in tools that challenge the control of collective cultural experience
+              reserved for digital monopolies, and working on ideas that steer digital utilities away from for-profit structures.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="services" class="bg-light project">
+    {% for project in projects %}
+
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8 mx-auto">
+                <div class="screenshots">
+                  <img class="desktop-screenshot" src="{{ project.desktop_screenshot.url }}">
+                  <img class="mobile-screenshot" src="{{ project.mobile_screenshot.url }}">
+                </div>
+                <h2>{{ project.name }}</h2>
+                <p class="lead">{{ project.brief }}</p>
+              </div>
+            </div>
+          </div>
+      {% endfor %}
+      </section>
+
+        <section id="contact">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8 mx-auto">
+                <h2>Contact us</h2>
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero odio fugiat voluptatem dolor, provident officiis, id iusto! Obcaecati incidunt, qui nihil beatae magnam et repudiandae ipsa exercitationem, in, quo totam.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Footer -->
+
+  {% endblock %}
