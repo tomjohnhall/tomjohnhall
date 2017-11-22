@@ -1,5 +1,13 @@
 {% extends "header.html" %}
 {% block content %}
+{% load staticfiles %}
+<header id="jumbo" class="jumbotron">
+  <div class="container text-center">
+  <h1 id="jumbotitle">Tom John Hall </h1>
+  <h2 id="jumbosub">A developing Man</h2>
+  <p>Web Developer working with python, django, javascript, wordpress, html5 and css3.</p>
+  </div>
+</header>
 <section id="about">
       <div class="container">
         <div class="row">
@@ -21,20 +29,24 @@
       </div>
     </section>
     <section id="services" class="bg-light project">
+
     {% for project in projects %}
 
-          <div class="container">
+          <div class="container project">
+
             <div class="row">
               <div class="col-lg-8 mx-auto">
+
                 <div class="screenshots">
                   <img class="desktop-screenshot" src="{{ project.desktop_screenshot.url }}">
                   <img class="mobile-screenshot" src="{{ project.mobile_screenshot.url }}">
                 </div>
-                <h2>{{ project.name }}</h2>
+                <a href="{% url 'developer:project' project.id %}"><h2>{{ project.name }}</h2></a>
                 <p class="lead">{{ project.brief }}</p>
               </div>
             </div>
           </div>
+        </div>
       {% endfor %}
       </section>
 

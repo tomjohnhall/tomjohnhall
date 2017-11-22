@@ -55,3 +55,11 @@ color: #acacac;
   top: 10%;
   right: -9%;
 }
+
+#services {
+  padding-top: 0px;
+}
+
+#project-bar {
+    background-color: rgba(70, 207, 162, 0.19);
+}
