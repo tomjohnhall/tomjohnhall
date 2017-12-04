@@ -22,7 +22,14 @@ function scifi(callback) {
 
     // links are passed in via json
     success : function(story) {
-      $('#story').html(story); // put the story in the div
+      console.log(story);
+      $('#story-title').html(story.title);
+      $('#author').html(story.author);
+      for (var i=0; i < story.body.length; i++) {
+        var p = '<p class="storypara">' + story.body[i] + '</p>';
+        $('#story-body').append(p);
+      }
+      // put the story in the div
       $('#load-scifi').hide(); // hide the loader
       $('#song-load').hide(); // hide the song-loader (for the header links)
       // hide the splash and show the story and player
@@ -34,13 +41,13 @@ function scifi(callback) {
   })
 }
 
-function loader() {
+function loader(nasapics) {
   $('#thestory').fadeOut();
   $('#splash').fadeOut();
   $('#song-load').fadeIn();
-  nasapics = ['url("http://saxonhouse.co/filedump/space1.jpg")', 'url("http://saxonhouse.co/filedump/space2.jpg")', 'url("http://saxonhouse.co/filedump/space3.jpg")'];
   randnasa = nasapics[Math.floor(Math.random()*nasapics.length)];
-  $('body').css('background-image', randnasa);
+  $('body').css('background-image', 'url('+randnasa+')')
+  ;
 }
 
 var scroll = true
@@ -93,13 +100,13 @@ function splashload(funke) {
   scifi(function() {player(funke, songEnd(funke))});
 }
 
-function loadsong(song) {
+function loadsong(song, nasapics) {
   if (isMobile.matches) {
     stopAudio();
     song.play();
     $('.whole-player').fadeIn();
   }
-  loader();
+  loader(nasapics);
   scifi(function() {player(song, songEnd(song))});
 }
 

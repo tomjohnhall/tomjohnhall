@@ -66,24 +66,5 @@ $('.pause-button').click( function() {
   });
 
 
-// DRAGGY SONG - drag small slider in player to change song position.
-// Note - does not work on locally hosted files for testing.
-
-$( "#draggySong" ).draggable({ axis: "x" }, {
-      start: function() {
-      },
-      drag: function() {
-      },
-      stop: function() {
-        var offset = $('#draggySong').position();
-        var draggedTo = offset.left;
-        var playerWidth = $('.player-wrap').width();
-        var divide = (playerWidth / draggedTo);
-        var songTime = (activeSong.duration / divide);
-        songTime = parseFloat(songTime);
-        activeSong.currentTime = songTime;
-      }
-    });
-
 
 });

@@ -63,3 +63,7 @@ color: #acacac;
 #project-bar {
     background-color: rgba(70, 207, 162, 0.19);
 }
+
+.project-nav {
+  text-align: right;
+}

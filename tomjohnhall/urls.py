@@ -21,9 +21,8 @@ from mailer.views import mailer_submit
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('myoldEP.urls')),
-    url(r'^transactions/', include('transactions.urls')),
+    url(r'^expensive/', include('transactions.urls')),
     url(r'^diary/', include('diary.urls')),
-    url(r'^myoldEP/', include('myoldEP.urls')),
     url(r'^modern-ghosts/', include('modernghosts.urls')),
     url(r'^mailer_submit/', mailer_submit, name="mailer_submit"),
     url(r'^developer/', include('developer.urls')),

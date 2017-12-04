@@ -30,6 +30,9 @@ body {
   background: #000000 url("{% static 'myoldEP/img/space2.jpg' %}") top left repeat;
 }
 </style>
+<script>
+ var nasapics = ['{% static "myoldEP/img/space1.jpg" %}','{% static "myoldEP/img/space2.jpg" %}' ,'{% static "myoldEP/img/space3.jpg" %}']
+</script>
 </head>
 
 
@@ -43,9 +46,9 @@ body {
           <img class="navbar-brand" id="tomjohnhall" src="{% static 'img/TJH_letters.png' %}" />
         </div>
         <ul class="nav navbar-nav" id="songs-nav">
-          <li id="funke-nav" class="active" onclick="loadsong(document.getElementById('funke')); return false;"><a href="#">1] Funke</a></li>
-          <li id="bucco-nav"><a onclick="loadsong(document.getElementById('bucco')); return false;">2] Bucco</a></li>
-          <li id="plums-nav"><a onclick="loadsong(document.getElementById('plums')); return false;">3] Plums</a></li>
+          <li id="funke-nav" class="active" onclick="loadsong(document.getElementById('funke'), nasapics); return false;"><a href="#">1] Funke</a></li>
+          <li id="bucco-nav"><a onclick="loadsong(document.getElementById('bucco'), nasapics); return false;">2] Bucco</a></li>
+          <li id="plums-nav"><a onclick="loadsong(document.getElementById('plums'), nasapics); return false;">3] Plums</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><button class="menu-button blank-button"> <img id="menu-button-icon" src="{% static 'img/start_menu_shortcuts.ico' %}" /> </button></li>
@@ -90,7 +93,7 @@ body {
             </div>
           </div>
           <div class="col-xs-6" style="height: 40px;">
-            <div id="refresh-scifi" onclick = "loader(); scifi(); return false">
+            <div id="refresh-scifi" onclick = "loader(nasapics); scifi(); return false">
               <span class="helper"></span>
               <img id="refresh-image" src="{% static 'myoldEP/img/refresh.png' %}" height="22px;" />
             </div>
@@ -109,6 +112,9 @@ body {
 
         <div id="story-wrap" class="scroll-wrap">
           <div id="story" class="scroll">
+            <h1 id ="story-title"></h1>
+            <h3 id="author"></h3>
+            <div id="story-body"></div>
           </div>
         </div>
         {% if story is False %}
