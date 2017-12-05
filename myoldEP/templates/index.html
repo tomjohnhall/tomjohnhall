@@ -51,7 +51,23 @@ body {
           <li id="plums-nav"><a onclick="loadsong(document.getElementById('plums'), nasapics); return false;">3] Plums</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><button class="menu-button blank-button"> <img id="menu-button-icon" src="{% static 'img/start_menu_shortcuts.ico' %}" /> </button></li>
+          <li class="pause-button right-nav">
+            <a href="#">
+            <span class="whole-player">
+            <img class="pause-image" src="{% static 'myoldEP/img/pause.png' %}" />
+            <img class="play-image" src="{% static 'myoldEP/img/play.png' %}" />
+            </span>
+            </a>
+          </li>
+          <li class="right-nav refresh-nav">
+            <a href="#">
+            <button class="blank-button whole-player" id="refresh-scifi" onclick = "loader(nasapics); scifi(); return false">
+              <span class="helper"></span>
+              <img id="refresh-image" src="{% static 'myoldEP/img/refresh.png' %}" height="22px;" />
+            </button>
+            </a>
+          </li>
+          <li class="right-nav"><button class="menu-button blank-button"> <img id="menu-button-icon" src="{% static 'img/start_menu_shortcuts.ico' %}" /> </button></li>
         </ul>
       </div>
     </nav>
@@ -61,12 +77,8 @@ body {
   {% include "site_menu.html" %}
 
   <div class="container-fluid">
-    <div class="row no-gutters whole-player">
-      <div class="col-xs-2 col-md-1 pause-button">
-        <span class="helper"></span>
-        <img class="pause-image" src="{% static 'myoldEP/img/pause.png' %}" />
-        <img class="play-image" src="{% static 'myoldEP/img/play.png' %}" />
-      </div>
+    <p id="original-link"><a target="_blank" id="story-link" href="">Original story</a></p>
+
       <audio id="funke" class="active-song" preload="auto">
         <source src="{% static 'myoldEP/audio/funke.mp3' %}" type="audio/mp3" />
       </audio>
@@ -76,31 +88,7 @@ body {
       <audio id="plums" preload="auto">
         <source src="{% static 'myoldEP/audio/plums.mp3' %}" type="audio/mp3" />
       </audio>
-      <div class="col-xs-8 col-md-10 player-wrap">
-        <div class="player">
-            <div class="player-line">
-            </div>
-        </div>
-        <div id="draggySong"> <img id="ship" src="{% static 'myoldEP/img/ship.svg' %}" /> </div>
-      </div>
-      <div class="col-xs-2 col-md-1" style="height: 40px;">
-        <div class="row no-gutters" style="height: 40px;">
-          <div class="col-xs-6" style="height: 40px;">
-            <div id="scroll-selector" onclick = "scrollToggle(); return false">
-              <!-- Icons by Iconika https://www.iconfinder.com/bileldjettaou -->
-              <span class="helper"></span>
-              <img id="scroll-image" src="{% static 'myoldEP/img/moon.svg' %}" height="25px;" />
-            </div>
-          </div>
-          <div class="col-xs-6" style="height: 40px;">
-            <div id="refresh-scifi" onclick = "loader(nasapics); scifi(); return false">
-              <span class="helper"></span>
-              <img id="refresh-image" src="{% static 'myoldEP/img/refresh.png' %}" height="22px;" />
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
+
 
 
     <div class="row no-gutters">
@@ -112,7 +100,7 @@ body {
 
         <div id="story-wrap" class="scroll-wrap">
           <div id="story" class="scroll">
-            <h1 id ="story-title"></h1>
+            <h1 id="story-title"></h1>
             <h3 id="author"></h3>
             <div id="story-body"></div>
           </div>
@@ -130,7 +118,7 @@ body {
         <h1> Internet Fiction </h1>
         <p> A brand new EP I made sometime in 2015. </p>
         <p style="font-size: 90%">
-          Songs paired with an indiscriminate chunk of amateur science fiction from an archive by sffworld. Plus, pictures of space, by NASA.</p>
+          Songs paired with an indiscriminate chunk of amateur science fiction from an archive by Daily Science Fiction. Plus, pictures of space, by NASA.</p>
         <button id="load-scifi" class="blank-button" onclick="splashload(document.getElementById('funke')); return false;">
           <img src="{% static 'myoldEP/img/earth.svg' %}" height="25px;"> &#9654;
         </button>

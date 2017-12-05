@@ -25,6 +25,7 @@ function scifi(callback) {
       console.log(story);
       $('#story-title').html(story.title);
       $('#author').html(story.author);
+      $('#story-link').attr('href', story.url);
       for (var i=0; i < story.body.length; i++) {
         var p = '<p class="storypara">' + story.body[i] + '</p>';
         $('#story-body').append(p);
@@ -34,7 +35,9 @@ function scifi(callback) {
       $('#song-load').hide(); // hide the song-loader (for the header links)
       // hide the splash and show the story and player
       $('#thestory').slideDown("slow", function() {
-        $('#splash').hide(); $('.whole-player').fadeIn();
+        $('#splash').hide();
+        $('.whole-player').fadeIn();
+        $('#original-link').fadeIn();
       });
 
     }

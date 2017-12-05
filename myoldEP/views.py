@@ -31,7 +31,7 @@ def loadSciFi(request):
         body = []
         for p in paras:
             body.append(p.get_text())
-        story = {'title': title, 'author': author, 'body': body}
+        story = {'title': title, 'author': author, 'body': body, 'url': url}
         return story
     url = 'http://dailysciencefiction.com/science-fiction/future-societies'
     headers ={"User-Agent":'USERAGENT'}

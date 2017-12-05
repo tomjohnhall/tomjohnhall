@@ -2,7 +2,7 @@
 #menu-button-icon {
   display: block;
   margin: auto;
-
+  margin-top: 3px;
 }
 
 .menu-button {
@@ -10,6 +10,15 @@
   right: 10px;
   justify-content: center;
 }
+
+.right-nav {
+  height: 50px;
+}
+
+.refresh-nav {
+  margin-left: -20px;
+}
+
 
 html, body, .container-fluid {
   height: 100%;
@@ -55,35 +64,16 @@ html, body, .container-fluid {
 }
 
 .whole-player {
-  width: 100%;
-  height: 40px;
-  background-color: rgba(255, 255, 255, 0.1);
   display: none;
 }
 
-.player-wrap {
-  width: 100%;
-  height: 40px;
-
+#original-link {
+  display: none;
+  text-align: center;
+  opacity: 0.7;
+  margin-top: -5px;
+  font-size: 11px;
 }
-
-.player {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background: repeating-linear-gradient(
-  45deg,
-  rgba(255, 255, 255, 0.05),
-  rgba(255, 255, 255, 0.05) 10px,
-  transparent 10px,
-  transparent 20px
-  );
-}
-
-.player-line {
-  position: absolute; width: 100%; height: 8px; top: 50%; margin-top: -4px; background-color: rgb(23, 29, 71);
-}
-
 
 #draggySong {
   height: 100%; position: absolute; width: 20px; top:50%; margin-top: -20px; z-index: 5;
@@ -99,10 +89,9 @@ html, body, .container-fluid {
 }
 
 .pause-button {
-  white-space: nowrap;
   text-align: center;
-  height: 100%;
   cursor: pointer;
+  margin-top: -5px;
 
 }
 
@@ -172,19 +161,10 @@ html, body, .container-fluid {
 }
 
 #scroll-selector {
-  background-color: transparent;
-  color: rgba(147, 160, 186, 0.75);
-  white-space: nowrap;
-  text-align: center;
-  height: 100%;
-  cursor: pointer;
 
 }
 
 #refresh-scifi {
-  text-align: center;
-  height: 100%;
-  cursor: pointer;
 
 }
 
@@ -260,6 +240,16 @@ html, body, .container-fluid {
 
 @media screen and (min-width: 768px) {
   #menu-button-icon {
-    margin-top: 7px;
+    margin-top: 5px;
     margin-bottom: -7px;
+  }
+
+  #story-title {
+    text-align: center;
+    font-size: 30px;
+  }
+
+  #author {
+    font-style: italic;
+    text-align: center;
   }
