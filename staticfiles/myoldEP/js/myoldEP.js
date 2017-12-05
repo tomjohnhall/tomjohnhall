@@ -26,6 +26,7 @@ function scifi(callback) {
       $('#story-title').html(story.title);
       $('#author').html(story.author);
       $('#story-link').attr('href', story.url);
+      $('#story-body').html('');
       for (var i=0; i < story.body.length; i++) {
         var p = '<p class="storypara">' + story.body[i] + '</p>';
         $('#story-body').append(p);
