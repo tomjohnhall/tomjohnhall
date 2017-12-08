@@ -5,13 +5,22 @@
 </div>
 <nav class="nav navbar navbar-default" id="project-bar">
   <div class="container">
+    <div style="width:100%">
     {% if prev_project %}
-    <a class="project-link" href="{% url 'developer:project' prev_project %}">Previous</a>
+    <div class="previous">
+    <a class="project-link" href="{% url 'developer:project' prev_project %}">
+      <i class="fa fa-arrow-left" aria-hidden="true"></i> Previous</a>
+    </div>
     {% endif %}
     {% if next_project %}
-    <a class="project-link" href="{% url 'developer:project' next_project %}">Next</a>
+    <div class="next">
+      <a class="project-link" href="{% url 'developer:project' next_project %}">
+        Next <i class="fa fa-arrow-right" aria-hidden="true"></i>
+      </a>
+    </div>
     {% endif %}
   </div>
+</div>
 </nav>
 <div class="container">
   <div class="row">
@@ -32,7 +41,7 @@
       <p> {{ project.cleverbits }} </p>
     </div>
   </div>
-  <div class="row">
+  <div class="row" style="margin-bottom: 50px;">
     <div class="col-lg-2">
       <h3>The rest:</h3>
     </div>
