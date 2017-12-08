@@ -12,6 +12,20 @@ section {
   padding: 100px 0;
 }
 
+.previous {
+  display: block
+}
+
+.next {
+  display: block;
+  float: right;
+  text-align: right;
+}
+
+.footer {
+  background-color: rgba(210, 226, 221, 0.86);
+}
+
 #jumbo {
 background: #141E30;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
@@ -64,6 +78,6 @@ color: #acacac;
     background-color: rgba(70, 207, 162, 0.19);
 }
 
-.project-nav {
-  text-align: right;
+#contact {
+  padding: 30px;
 }
