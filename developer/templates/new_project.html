@@ -1,0 +1,37 @@
+{% if form %}
+  {% if form.errors %}
+    <p style="color: red;">
+        Please correct the error {{ form.errors|pluralize }} below.
+    </p>
+  {% endif %}
+<form enctype="multipart/form-data" method="post" action="">
+
+  {{ form.name }}
+  {{ form.name.errors }}
+  {{ form.url }}
+  {{ form.url.errors }}
+  {{ form.desktop_screenshot }}
+  {{ form.desktop_screenshot.errors }}
+  {{ form.mobile_screenshot }}
+  {{ form.mobile_screenshot.errors }}
+  {{ form.brief }}
+  {{ form.brief.errors }}
+  {{ form.cleverbits }}
+  {{ form.cleverbits.errors }}
+  {{ form.description }}
+  {{ form.description.errors }}
+
+<div id="submit">
+  <input type = "submit" value="Save">
+</div>
+
+{% csrf_token %}
+
+</form>
+{% else %}
+  {% if success %}
+  <p> {{ success }} </p>
+{% else %}
+  <p> Um, better check that database - something looks iffy. </p>
+  {% endif %}
+{% endif %}

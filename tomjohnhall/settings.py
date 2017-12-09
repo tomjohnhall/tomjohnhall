@@ -137,6 +137,13 @@ DJANGO_WYSIWYG_FLAVOR = "ckeditor"
 
 CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
 
+DEFAULT_FILE_STORAGE = 'django_b2storage.backblaze_b2.B2Storage'
+B2_ACCOUNT_ID = '5b10e0ef9a9c'
+B2_APPLICATION_KEY = '0017bad24626ae5c9867669454e19fdc7b6d3b2127'
+B2_BUCKET_NAME = 'tjhdeveloper'
+B2_BUCKET_ID = 'b56b31b03e703e7f690a091c'
+
+
 HOTKEYS = [
             {'keys': 'g + h',  # go home
             'link': '/'},
