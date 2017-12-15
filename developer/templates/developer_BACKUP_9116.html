@@ -38,6 +38,18 @@
               <div class="col-lg-8 mx-auto">
 
                 <div class="screenshots">
+                  <div class="projects-arrows">
+                  {% if not forloop.first %}
+                    <span style="float:left" class="previous-project nav-item">
+                      <i class="fa fa-arrow-circle-o-up"></i>
+                    </span>
+                  {% endif %}
+                  {% if not forloop.last %}
+                    <span style="float:right" class="next-project nav-item">
+                      <i class="fa fa-arrow-circle-o-down"></i>
+                    </span>
+                  {% endif %}
+                  </div>
                   <img class="desktop-screenshot" src="{{ project.desktop_screenshot.url }}">
                   <img class="mobile-screenshot" src="{{ project.mobile_screenshot.url }}">
                 </div>
@@ -48,16 +60,7 @@
             <div class="row">
               <div class="col-lg-8 mx-auto">
               <nav class="project-nav nav navbar-default">
-                <div class="container-fluid">
-                  <ul class="nav navbar-nav navbar-right">
-                  {% if not forloop.first %}
-                    <li class="previous-project nav-item">Previous</p>
-                  {% endif %}
-                  {% if not forloop.last %}
-                    <li class="next-project nav-item">Next</p>
-                  </ul>
-                  {% endif %}
-                </div>
+
               </nav>
               </div>
             </div>

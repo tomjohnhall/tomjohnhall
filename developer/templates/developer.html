@@ -3,7 +3,7 @@
 {% load staticfiles %}
 <header id="jumbo" class="jumbotron">
   <div class="container text-center">
-  <h1 id="jumbotitle">Tom John Hall </h1>
+  <h1 id="jumbotitle"><img src="{% static 'developer/img/TJHName.png' %}" /></h1>
   <h2 id="jumbosub">A developing Man</h2>
   <p>Web Developer working with python, django, javascript, wordpress, html5 and css3.</p>
   </div>
@@ -18,11 +18,11 @@
               tidy, intuitive websites.
             </p>
             <p>
-                As a Music Tech student I wanted to equip myself with the tools to build a fairer music streaming service. Since then I've expanded to
-                song-apps with Django, web crawling and data composition using routine python tasks, and intelligent wordpress portfolio sites.
+                I began learning to code as a Music Tech student to equip myself with the tools to work on audio projects. Since then I've expanded to
+                song-apps with Django, building databases using routine python tasks, and smart wordpress portfolio sites.
             </p>
-            <p> I'm particularly interested in tools that challenge the control of collective cultural experience
-              reserved for digital monopolies, and working on ideas that steer digital utilities away from for-profit structures.
+            <p> My goal is to work on tools that challenge the control of collective cultural experience
+              reserved for digital monopolies, and work on ideas that steer digital utilities away from for-profit structures.
             </p>
           </div>
         </div>
@@ -38,6 +38,18 @@
               <div class="col-lg-8 mx-auto">
 
                 <div class="screenshots">
+                  <div class="projects-arrows">
+                  {% if not forloop.first %}
+                    <span style="float:left" class="previous-project nav-item">
+                      <i class="fa fa-arrow-circle-o-up"></i>
+                    </span>
+                  {% endif %}
+                  {% if not forloop.last %}
+                    <span style="float:right" class="next-project nav-item">
+                      <i class="fa fa-arrow-circle-o-down"></i>
+                    </span>
+                  {% endif %}
+                  </div>
                   <img class="desktop-screenshot" src="{{ project.desktop_screenshot.url }}">
                   <img class="mobile-screenshot" src="{{ project.mobile_screenshot.url }}">
                 </div>
@@ -48,16 +60,6 @@
             <div class="row">
               <div class="col-lg-8 mx-auto">
               <nav class="project-nav nav navbar-default">
-                <div class="container-fluid">
-                  <ul class="nav navbar-nav navbar-right">
-                  {% if not forloop.first %}
-                    <li class="previous-project nav-item">Previous</p>
-                  {% endif %}
-                  {% if not forloop.last %}
-                    <li class="next-project nav-item">Next</p>
-                  </ul>
-                  {% endif %}
-                </div>
               </nav>
               </div>
             </div>

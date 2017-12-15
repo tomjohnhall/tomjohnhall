@@ -20,19 +20,17 @@ def developer_index(request):
 
 def project(request, project_id):
     project = Project.objects.get(id=project_id)
-    prev_id = project.id - 1
-    next_id = project.id + 1
-    # try for a previous/next transaction and convert to string
     try:
-        Project.objects.get(id = prev_id)
-        prev_project = str(prev_id)
-    except Project.DoesNotExist:
+        prevp = Project.objects.filter(id__gt=project_id).order_by("id")[0]
+        prev_project = str(prevp.id)
+    except IndexError:
         prev_project = None
     try:
-        Project.objects.get(id = next_id)
-        next_project = str(next_id)
-    except Project.DoesNotExist:
+        nextp = Project.objects.filter(id__lt=project_id).order_by("-id")[0]
+        next_project = str(nextp.id)
+    except IndexError:
         next_project = None
+    # try for a previous/next transaction and convert to string
     return render(request, 'project.html', {'project': project, 'prev_project': prev_project, 'next_project': next_project})
 
 def addProject(request):

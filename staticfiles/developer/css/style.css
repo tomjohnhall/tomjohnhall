@@ -26,13 +26,36 @@ section {
   background-color: rgba(210, 226, 221, 0.86);
 }
 
+
+.project-arrows {
+  display: none;
+}
+
+@media (min-width: 768px) {
+.projects-arrows {
+  width: 40px;
+  position: absolute;
+  top : 25px;
+  right: 45px;
+}
+
+.next-project, .previous-project {
+  opacity: 0.3;
+  color: #505050;
+}
+
+.next-project:hover, .previous-project:hover {
+  opacity: 0.9
+}
+}
+
 #jumbo {
-background: #141E30;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: #8e9cb5;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #bdcada, #eaeef5);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #bdcada, #eaeef5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 margin-top: 55px;
 padding-left: 20px;
-color: #acacac;
+color: #4f4d4d;
 
 }
 
@@ -48,7 +71,7 @@ color: #acacac;
 }
 
 #mainNav {
-  background-color: rgba(210, 226, 221, 0.86);
+  background-color: rgba(149, 195, 214, 0.69);
 }
 
 #services {
