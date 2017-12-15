@@ -54,6 +54,10 @@ section {
 .next-project:hover, .previous-project:hover {
   opacity: 0.9
 }
+
+#jumbosub {
+  font-size: 55px;
+}
 }
 
 #jumbo {
@@ -74,7 +78,7 @@ color: #4f4d4d;
 
 #jumbosub {
   font-family: 'Amatic SC', cursive;
-  font-size: 55px;
+  font-size: 30px;
 }
 
 #mainNav {
