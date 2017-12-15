@@ -13,13 +13,15 @@ section {
 }
 
 .previous {
-  display: block
+  display: inline-block;
+  width: 50%;
 }
 
 .next {
-  display: block;
+  display: inline-block;
   float: right;
   text-align: right;
+  width: 50%;
 }
 
 .footer {
@@ -27,7 +29,7 @@ section {
 }
 
 
-.project-arrows {
+.projects-arrows {
   display: none;
 }
 
