@@ -15,7 +15,7 @@ import requests
 # Create your views here.
 
 def developer_index(request):
-    projects = Project.objects.all()
+    projects = Project.objects.all().order_by('-id')
     return render(request, 'developer.html', {'projects': projects})
 
 def project(request, project_id):
