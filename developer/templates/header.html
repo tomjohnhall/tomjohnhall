@@ -27,7 +27,7 @@
         {% else %}
         <a class="navbar-brand js-scroll-trigger" href="#page-top">tjh</a>
         {% endif %}
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <button id="navToggle" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -70,5 +70,15 @@
   <script src="{% static 'developer/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'developer/js/scrolling-nav.js' %}"></script>
   <script src="{% static 'developer/js/projects.js' %}"></script>
+  <script>
+  $(document).ready(function() {
+    $('.collapse').on('show.bs.collapse', function() {
+      $('#mainNav').animate({'background-color':'rgba(149, 195, 214, 1);'}, 400);
+    });
+    $('.collapse').on('hide.bs.collapse', function() {
+      $('#mainNav').animate({'background-color':'rgba(149, 195, 214, 0.69);'}, 400);
+    });
+  });
+  </script>
 </body>
 </html>

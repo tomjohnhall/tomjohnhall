@@ -44,6 +44,6 @@ def loadSciFi(request):
             refs.append(ref)
         story_url = 'http://dailysciencefiction.com' + random.choice(refs)
         story = getSciFi(story_url, headers)
-    except:
+    except Exception:
         pass
     return JsonResponse(story, safe=False)
