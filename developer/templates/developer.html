@@ -53,7 +53,7 @@
                   <img class="desktop-screenshot" src="{{ project.desktop_screenshot.url }}">
                   <img class="mobile-screenshot" src="{{ project.mobile_screenshot.url }}">
                 </div>
-                <a href="{% url 'developer:project' project.id %}"><h2>{{ project.name }}</h2></a>
+                <a href="{% url 'developer:project' project.id %}"><h2 class="project-title">{{ project.name }}</h2></a>
                 <p class="lead">{{ project.brief }}</p>
               </div>
             </div>
