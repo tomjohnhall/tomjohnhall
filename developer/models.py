@@ -12,5 +12,6 @@ class Project(models.Model):
     brief = models.TextField()
     cleverbits = models.TextField()
     description = models.TextField()
+    page_index = models.DecimalField(max_digits=2, decimal_places=0, default=1)
     def __unicode__(self):
         return u'%s' % self.name

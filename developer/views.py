@@ -15,18 +15,18 @@ import requests
 # Create your views here.
 
 def developer_index(request):
-    projects = Project.objects.all().order_by('-id')
+    projects = Project.objects.all().order_by('page_index')
     return render(request, 'developer.html', {'projects': projects})
 
 def project(request, project_id):
     project = Project.objects.get(id=project_id)
     try:
-        prevp = Project.objects.filter(id__gt=project_id).order_by("id")[0]
+        prevp = Project.objects.filter(id__gt=project_id).order_by("-page_index")[0]
         prev_project = str(prevp.id)
     except IndexError:
         prev_project = None
     try:
-        nextp = Project.objects.filter(id__lt=project_id).order_by("-id")[0]
+        nextp = Project.objects.filter(id__lt=project_id).order_by("page_index")[0]
         next_project = str(nextp.id)
     except IndexError:
         next_project = None
