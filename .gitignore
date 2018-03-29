@@ -1,4 +1,8 @@
 env
+env.test
+.env
+.env.test
+ProcAlts.txt
 *.DS_Store
 *.pyc
 __pycache__

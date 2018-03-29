@@ -20,12 +20,13 @@ from mailer.views import mailer_submit
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^', include('transaction.urls')),
+    url(r'^', include('transactions.urls')),
     url(r'^expensive/', include('transactions.urls')),
     url(r'^diary/', include('diary.urls')),
     url(r'^modern-ghosts/', include('modernghosts.urls')),
     url(r'^mailer_submit/', mailer_submit, name="mailer_submit"),
     url(r'^developer/', include('developer.urls')),
+    url(r'^internet-fiction/', include('myoldEP.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
