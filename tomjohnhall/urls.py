@@ -20,7 +20,7 @@ from mailer.views import mailer_submit
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^', include('myoldEP.urls')),
+    url(r'^', include('transaction.urls')),
     url(r'^expensive/', include('transactions.urls')),
     url(r'^diary/', include('diary.urls')),
     url(r'^modern-ghosts/', include('modernghosts.urls')),

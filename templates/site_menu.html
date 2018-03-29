@@ -7,13 +7,8 @@
     <div id="menu-links">
       <div class="menu-column left">
         <h1> internal comms: </h1>
-        <h2> (songs from My Big Album) </h2>
         <ul>
-          <!-- {% url 'transactions:thing' %} -->
-          <li><span> Expensive (Coming Soon) </span></li>
-        </ul>
-        <h2> (other stuff) </h2>
-        <ul>
+          <li><a href="{% url 'transactions:thing' %}"> Expensive </a></li>
           <li><a href="{% url 'myoldEP:index' %}"> Internet Fiction (An EP) </a> </li>
           <li><a href="{% url 'diary:index' %}"> My Secret Diary </a></li>
           <script>function mailer() {$('#mailer').modal();}</script>
@@ -32,7 +27,7 @@
         </ul>
         <h2> (other things I do) </h2>
         <ul>
-          <li>Web Development (Under Construction)</li> 
+          <li><a href="{% url 'developer:developer_index' %}"> Web Development </a></li>
         </ul>
       </div>
     </div>
