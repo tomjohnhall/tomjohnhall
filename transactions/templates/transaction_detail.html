@@ -25,20 +25,6 @@
 {% elif transaction.bing_image %}
   <p> <span> Image: </span> <img src = "{{ transaction.bing_image }} " style="width: 500px;" /> </p>
 {% endif %}
-<div id="map{{ transaction.id }}" class="map"></div>
-    <script>
-      function initMap() {
-        var uluru{{ transaction.id }} = {lat: {{ transaction.lat }} , lng: {{ transaction.lon }} };
-        var map{{ transaction.id }} = new google.maps.Map(document.getElementById('map{{ transaction.id }}'), {
-          zoom: 15,
-          center: uluru{{ transaction.id }}
-        });
-        var marker{{ transaction.id }} = new google.maps.Marker({
-          position: uluru{{ transaction.id }},
-          map: map{{ transaction.id }}
-        });
-      }
-    </script>
 
 <p> <span> Notes: </span> {{ transaction.notes }} </p>
 <p> <span> Links: </span>
@@ -55,9 +41,6 @@
   <a href= "{% url 'transactions:transaction_detail' next_tran %}"> Next </a>
 {% endif %}
 
-<script async defer
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdzJbLmVPAW4JUWICdAtvWdRUlnK6TrWU&callback=initMap">
-</script>
 </div>
 </body>
 </html>

@@ -108,13 +108,6 @@
         </div>
     </div>
   </div>
-  <div id="map-button">
-    <button class="btn" style="opacity: 0.8" onclick="showMap()"><img src="{% static 'img/location.png' %}" style="height: 30px;"></button>
-  </div>
-  <div id="map-container">
-    <button id="map-close" class="btn btn-default" onclick="hideMap()">X</button>
-    <div id="map"></div>
-  </div>
 </div>
 
     {% csrf_token %}
@@ -132,16 +125,12 @@
       <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>.
   </div>
 
-  <script src="http://maps.google.com/maps/api/js?key=AIzaSyAdzJbLmVPAW4JUWICdAtvWdRUlnK6TrWU"></script>
   <script src= " {% static 'transactions/js/transactions.js' %} " ></script>
   <script src= "{% static 'js/menu.js' %}" > </script>
   <script>
   isMobile();
   prep_ajax();
-  var map;
-  var poly;
   swap();
-  initMap({{ transaction.lat }}, {{transaction.lon }});
   guiltfeed({{transaction.id}});
 
   </script>
