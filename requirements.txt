@@ -10,7 +10,7 @@ chardet==3.0.4
 click==6.7
 cssselect==1.0.1
 dj-database-url==0.4.2
-Django==1.10.5
+Django==2.2.24
 django-b2storage==1.0
 django-backblazeb2-storage==0.4
 django-bootstrap3==8.2.1
