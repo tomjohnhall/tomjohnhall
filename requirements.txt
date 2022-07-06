@@ -31,7 +31,7 @@ idna==2.7
 itsdangerous==0.24
 Jinja2==2.10
 logfury==0.1.2
-lxml==3.4.0
+lxml==4.9.1
 MarkupSafe==1.0
 olefile==0.44
 phonenumberslite==8.5.2
